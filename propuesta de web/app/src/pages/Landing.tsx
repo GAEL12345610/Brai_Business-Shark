@@ -1,0 +1,419 @@
+import { useState } from 'react'
+import { Link } from 'react-router'
+import { ArrowRight, Check, X } from 'lucide-react'
+import { TarjetaTilt } from '../components/movimiento'
+import { Isotipo, Logo, SelloNFC, TarjetaDueno } from '../components/marca'
+import { Cifra, EscenaSello, LinkReclamarDemo, Pregunta, Raspadita } from '../components/interaccion'
+import HistoriaObra from '../components/HistoriaObra'
+import { ARTISTA, CODIGO_DEMO, OBRAS } from '../data/demo'
+
+// El botón de fundadores lleva al recorrido mientras no exista el correo del
+// equipo (TODO.md, sección 1). Cuando exista, puede volver a ser un mailto.
+const OBRA_DEMO = OBRAS[0]
+
+// Cifras con fuente (docs/ANALISIS.md y docs/COSTOS.md). No inventar.
+const CIFRAS = [
+  {
+    valor: 69,
+    sufijo: '%',
+    texto: 'de los coleccionistas ya le compró directo a un artista, sin galería.',
+    fuente: 'Art Basel y UBS, Survey of Global Collecting 2025',
+    url: 'https://ocula.com/magazine/art-news/2025-art-basel-ubs-survey-global-collecting/',
+  },
+  {
+    valor: 8870,
+    texto: 'pintores, escultores y artistas visuales trabajan en Jalisco.',
+    fuente: 'DataMéxico, ENOE 2025',
+    url: 'https://www.economia.gob.mx/datamexico/es/profile/occupation/pintores-disenadores-y-dibujantes-artisticos-escultores-y-escenografos',
+  },
+  {
+    valor: 78,
+    sufijo: '%',
+    texto: 'de los celulares en México son Android, y muchos no traen NFC o lo traen apagado. Por eso cada sello lleva un QR al lado.',
+    fuente: 'StatCounter México, jul 2026',
+    url: 'https://gs.statcounter.com/os-market-share/mobile/mexico',
+  },
+]
+
+const PASOS = [
+  { titulo: 'Registras la obra', texto: 'Fotos, tres fotos huella de detalles únicos, ficha e historia. La obra recibe su número: BRAI-0007.' },
+  { titulo: 'Sellamos el cuadro', texto: 'Un sello NFC detrás, que se rompe si lo despegan, y un QR al lado para celulares sin NFC.' },
+  { titulo: 'Entregas la tarjeta', texto: 'Firmada a mano por ti, con el código de dueño escondido bajo una raspadita.' },
+  { titulo: 'Tu comprador la reclama', texto: 'Raspa, escribe su código y su correo, y la obra queda a su nombre. Tú sabes quién la tiene.' },
+]
+
+// Sobre bg-arena el verde no llega a 4.5:1 (4.3): ahí va en tinta.
+function Kicker({ children, sobreArena = false }: { children: string; sobreArena?: boolean }) {
+  return <p className={`font-mono text-xs uppercase tracking-[0.16em] ${sobreArena ? 'text-tinta/85' : 'text-verde'}`}>{children}</p>
+}
+
+export default function Landing() {
+  const [raspada, setRaspada] = useState(false)
+  return (
+    <div className="brai-propuesta">
+      <section className="brai-portada" aria-labelledby="brai-eslogan">
+        <div className="brai-portada-marca">
+          <img src="/brand/isotipo.svg" width="128" height="128" alt="" className="brai-portada-isotipo" />
+          <span className="brai-portada-nombre font-display font-semibold">Brai</span>
+        </div>
+        <h1 id="brai-eslogan" className="brai-portada-eslogan font-display font-semibold">
+          Cada obra sabe<br className="sm:hidden" /> de dónde viene.
+        </h1>
+        <nav aria-label="Principal" className="brai-subtitulos">
+          <a href="#como-funciona">Cómo funciona</a>
+          <a href="#para-ti">Para artistas</a>
+          <Link to="/recorrido">Ver demo <ArrowRight size={15} aria-hidden="true" /></Link>
+        </nav>
+      </section>
+
+      <main>
+        <section id="el-problema" className="border-t border-linea bg-white">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+            <div className="revela">
+              <Kicker>El problema</Kicker>
+              <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-[-0.01em] sm:text-[2.6rem]">
+                La obra se va. Su historia no debería perderse.
+              </h2>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-tinta/85">
+                Después de vender una obra, el artista puede perder el contacto con quien la compró. La historia del cuadro y el registro
+                de sus dueños también pueden perderse. Brai propone registrar la procedencia de cada obra y conectar al artista con
+                quienes la coleccionan.
+              </p>
+              <HistoriaObra imagen={OBRA_DEMO.imagen} />
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link to="/recorrido" className="inline-flex items-center justify-center gap-2 rounded-[10px] bg-terracota-btn px-6 py-3.5 font-semibold text-lienzo transition-colors hover:bg-terracota-hover">
+                  Recorrer la demo en 5 minutos <ArrowRight size={18} />
+                </Link>
+                <Link to={`/o/${OBRA_DEMO.codigo}`} className="inline-flex items-center justify-center rounded-[10px] border-[1.5px] border-tinta px-6 py-3.5 font-semibold transition-colors hover:bg-tinta/5">
+                  Ver una obra de ejemplo
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Cifras */}
+        <section className="border-t border-linea">
+          <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-3 md:py-20">
+            {CIFRAS.map((c) => (
+              <div key={c.fuente} className="revela">
+                <p className="font-display text-6xl font-semibold tracking-[-0.02em] text-terracota-btn">
+                  <Cifra valor={c.valor} sufijo={c.sufijo} />
+                </p>
+                <p className="mt-3 max-w-xs leading-relaxed">{c.texto}</p>
+                {c.url ? (
+                  <a href={c.url} target="_blank" rel="noreferrer" className="mt-3 inline-block font-mono text-[11px] text-verde underline-offset-2 hover:underline">
+                    {c.fuente}
+                  </a>
+                ) : (
+                  <p className="mt-3 font-mono text-[11px] text-verde">{c.fuente}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <EscenaSello titulo={OBRA_DEMO.titulo} artista={ARTISTA.nombre} registro={OBRA_DEMO.registro} imagen={OBRA_DEMO.imagen} />
+
+        {/* Cómo funciona */}
+        <section id="como-funciona" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6 md:py-28">
+          <div className="revela max-w-2xl">
+            <Kicker>Cómo funciona</Kicker>
+            <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-[-0.01em] sm:text-[2.6rem]">
+              Lo montamos contigo, obra por obra.
+            </h2>
+          </div>
+          <ol className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {PASOS.map((p, i) => (
+              <li key={p.titulo} className="revela paso pt-5">
+                <span className="font-mono text-xs text-verde">Paso {i + 1}</span>
+                <h3 className="mt-2 text-xl font-semibold">{p.titulo}</h3>
+                <p className="mt-2 leading-relaxed text-tinta/80">{p.texto}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* Lo que ve el artista: el corazón de la oferta */}
+        <section id="para-ti" className="scroll-mt-20 border-t border-linea bg-white">
+          <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 py-20 sm:px-6 md:grid-cols-[1fr_1.1fr] md:py-28">
+            <div className="revela">
+              <Kicker>Lo que ves tú</Kicker>
+              <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-[-0.01em] sm:text-[2.6rem]">
+                Tu panel te dice quién reclamó cada obra.
+              </h2>
+              <p className="mt-5 max-w-xl text-lg leading-relaxed text-tinta/85">
+                Cuando tu comprador reclama la obra y deja su correo, aparece en tu panel. Si no la reclama, no sabrás quién es: Brai no
+                adivina. Cuando terminas una obra nueva, puedes escribirles primero a quienes ya te compraron. En público, el dueño solo sale
+                con sus iniciales.
+              </p>
+              <Link
+                to="/panel"
+                className="mt-8 inline-flex items-center gap-2 rounded-[10px] border-[1.5px] border-tinta px-6 py-3.5 font-semibold transition-colors hover:bg-tinta/5"
+              >
+                Ver el panel de ejemplo <ArrowRight size={18} />
+              </Link>
+            </div>
+            <div className="revela">
+              <TarjetaTilt className="rounded-2xl border border-linea bg-lienzo p-6">
+                <div className="flex items-center justify-between [transform:translateZ(24px)]">
+                  <p className="font-semibold">Quién tiene tu obra</p>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-verde">Ejemplo ficticio</span>
+                </div>
+                <ul className="mt-4 divide-y divide-linea border-y border-linea [transform:translateZ(16px)]">
+                  {[
+                    { nombre: 'Mariana Ruiz', correo: 'mariana.ruiz@example.com', obra: 'Sin título I', desde: '24 oct 2026' },
+                    { nombre: 'Andrés Gómez', correo: 'andres.g@example.com', obra: 'Sin título II', desde: '28 oct 2026' },
+                  ].map((d) => (
+                    <li key={d.correo} className="py-3">
+                      <p className="flex items-center gap-2 font-semibold">
+                        <i className="size-2 rounded-full bg-dorado" /> {d.nombre}
+                      </p>
+                      <p className="font-mono text-xs text-tinta/75">{d.correo}</p>
+                      <p className="text-xs text-tinta/65">{d.obra} · desde {d.desde}</p>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 inline-flex rounded-[10px] bg-terracota-btn px-4 py-2.5 text-sm font-semibold text-lienzo [transform:translateZ(30px)]">
+                  Avisarles de tu obra nueva
+                </div>
+              </TarjetaTilt>
+            </div>
+          </div>
+        </section>
+
+        {/* Las 3 piezas */}
+        <section className="bg-arena">
+          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+            <div className="revela max-w-2xl">
+              <Kicker sobreArena>Lo que recibe tu comprador</Kicker>
+              <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-[-0.01em] sm:text-[2.6rem]">
+                Tres piezas, como la cédula de un museo.
+              </h2>
+            </div>
+            <div className="mt-14 grid items-end gap-12 md:grid-cols-3">
+              <figure className="revela flex flex-col items-center gap-5">
+                <SelloNFC registro={OBRA_DEMO.registro} ondas />
+                <figcaption className="max-w-xs text-center">
+                  <span className="font-semibold">El sello.</span> Va detrás del cuadro y abre la página de la obra al acercar el celular.
+                </figcaption>
+              </figure>
+              <figure className="revela flex flex-col items-center gap-5">
+                <TarjetaDueno
+                  titulo={OBRA_DEMO.titulo}
+                  artista={ARTISTA.nombre}
+                  ficha={`${OBRA_DEMO.registro} · ${OBRA_DEMO.tecnica} · ${OBRA_DEMO.medidas}`}
+                >
+                  <Raspadita codigo={CODIGO_DEMO} alRevelar={() => setRaspada(true)} />
+                </TarjetaDueno>
+                <figcaption className="max-w-xs text-center">
+                  {raspada ? (
+                    <LinkReclamarDemo codigoObra={OBRA_DEMO.codigo} codigo={CODIGO_DEMO} titulo={OBRA_DEMO.titulo} />
+                  ) : (
+                    <>
+                      <span className="font-semibold">La tarjeta de dueño.</span> Firmada a mano. Ráspala: si la raspadita está intacta, nadie vio el código antes. (En esta demo el código es público.)
+                    </>
+                  )}
+                </figcaption>
+              </figure>
+              <figure className="revela flex flex-col items-center gap-5">
+                <Link
+                  to={`/o/${OBRA_DEMO.codigo}`}
+                  className="group block w-40 overflow-hidden rounded-[22px] border-[6px] border-tinta bg-white"
+                >
+                  <img src={OBRA_DEMO.imagen} alt="" className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="px-2.5 py-2">
+                    <div className="truncate font-display text-sm font-semibold">{OBRA_DEMO.titulo}</div>
+                    <div className="mt-1 flex items-center gap-1.5 text-[10px] font-semibold">
+                      <i className="size-2 rounded-full bg-dorado" /> Ejemplo
+                    </div>
+                  </div>
+                </Link>
+                <figcaption className="max-w-xs text-center">
+                  <span className="font-semibold">La página de la obra.</span> Su historia, su ficha y su línea de dueños.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        {/* Promesa honesta */}
+        <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+          <div className="revela max-w-2xl">
+            <Kicker>Lo que prometemos</Kicker>
+            <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-[-0.01em] sm:text-[2.6rem]">
+              Te decimos lo que sí hace, y lo que no.
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-tinta/85">
+              La verdad de una obra vive en su registro, no en el chip. El sello es la puerta. Lo que dice quién la pintó y de quién es,
+              lo guarda Brai.
+            </p>
+            <p className="mt-3 leading-relaxed text-tinta/70">
+              Así está diseñado. Hoy es un prototipo: el registro real todavía no está conectado y en esta demo esas piezas se simulan.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-10 md:grid-cols-2">
+            <ul className="revela space-y-4 border-t border-tinta pt-6">
+              {[
+                'Verificada por el artista: tú la registraste, con fecha y fotos.',
+                'Registro de propiedad y procedencia, con cada dueño en orden.',
+                'Fotos huella para comparar el cuadro con su registro.',
+                'Un código de dueño de un solo uso, bajo raspadita.',
+              ].map((t) => (
+                <li key={t} className="flex gap-3">
+                  <Check className="mt-0.5 shrink-0 text-verde" size={20} />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+            <ul className="revela space-y-4 border-t border-linea pt-6 text-tinta/70">
+              {[
+                'Que nadie pueda copiar jamás tu obra. Nadie serio puede prometer eso.',
+                'Una prueba legal de quién es el dueño. Es un registro, no una escritura.',
+                'Que tu comprador la reclame: si no lo hace, no tendrás su contacto.',
+                'Ventas garantizadas.',
+              ].map((t) => (
+                <li key={t} className="flex gap-3">
+                  <X className="mt-0.5 shrink-0" size={20} />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* Fundadores */}
+        <section id="fundadores" className="scroll-mt-20 bg-tinta text-lienzo">
+          <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-[1.2fr_1fr] md:py-28">
+            <div className="revela">
+              <p className="font-mono text-xs uppercase tracking-[0.16em] text-lienzo/70">Artistas fundadores</p>
+              <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-[-0.01em] sm:text-[2.6rem]">
+                Buscamos a los primeros 3 artistas.
+              </h2>
+              <p className="mt-5 max-w-xl text-lg leading-relaxed text-lienzo/85">
+                La propuesta: te montamos Brai gratis y te damos 3 meses sin costo. A cambio, registras de 3 a 5 obras reales, entregas las
+                tarjetas a tus compradores y nos dejas contar tu caso. Antes de eso, primero queremos platicar contigo y escuchar si esto te
+                sirve.
+              </p>
+              <p className="mt-4 max-w-xl leading-relaxed text-lienzo/70">
+                Es para ti si vendes obra original directo, en tu taller, por redes o por encargo, y vendes 10 obras o más al año, o
+                tienes tu propia audiencia.
+              </p>
+              <Link
+                to="/recorrido"
+                className="mt-9 inline-flex items-center gap-2 rounded-[10px] bg-lienzo px-6 py-3.5 font-semibold text-tinta transition-colors hover:bg-white"
+              >
+                Recorrer la demo en 5 minutos <ArrowRight size={18} />
+              </Link>
+              <p className="mt-4 max-w-xl text-sm leading-relaxed text-lienzo/70">
+                Todavía no abrimos registros ni tenemos un correo público del proyecto. Este sitio no pide tus datos.
+              </p>
+            </div>
+            <div className="revela self-end border-t border-lienzo/25 pt-6">
+              <p className="font-mono text-xs uppercase tracking-[0.16em] text-lienzo/70">Precio publicado, sin validar</p>
+              <dl className="mt-5 space-y-5">
+                <div>
+                  <dt className="text-sm text-lienzo/70">Arranque, una vez</dt>
+                  <dd className="font-display text-4xl font-semibold">7,500 MXN</dd>
+                  <dd className="mt-1 text-sm text-lienzo/70">Tu página, 20 obras registradas, 20 sellos y 20 tarjetas.</dd>
+                </div>
+                <div>
+                  <dt className="text-sm text-lienzo/70">Cada mes</dt>
+                  <dd className="font-display text-4xl font-semibold">990 MXN</dd>
+                  <dd className="mt-1 text-sm text-lienzo/70">Obras nuevas, transferencias y aviso cuando una obra cambia de dueño.</dd>
+                </div>
+              </dl>
+              <p className="mt-6 text-sm leading-relaxed text-lienzo/85">
+                Estamos probando este precio y una alternativa por obra (2,500 MXN de arranque y 450 MXN por obra adicional). Ningún artista lo
+                ha pagado todavía.
+              </p>
+              <p className="mt-3 text-xs leading-relaxed text-lienzo/65">
+                Referencia ilustrativa, no una promesa: con obras de 12,000 MXN, el primer año (19,380 MXN) equivale al precio de venta de 2
+                obras. Es dinero bruto, no ganancia, y no está comprobado que Brai cause esas ventas.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Preguntas */}
+        <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:grid md:grid-cols-[1fr_1.6fr] md:gap-14 md:py-28">
+          <div className="revela">
+            <Kicker>Preguntas</Kicker>
+            <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-[-0.01em] sm:text-[2.6rem]">Lo que nos preguntan.</h2>
+          </div>
+          <div className="revela mt-8 border-t border-linea md:mt-0">
+            <Pregunta pregunta="¿Y si mi comprador no tiene NFC en su celular?">
+              Cada sello lleva un QR al lado. Cualquier celular con cámara abre la misma página. En México casi 8 de cada 10 celulares son
+              Android y muchos traen el NFC apagado, por eso el QR no es opcional.
+            </Pregunta>
+            <Pregunta pregunta="¿Se puede copiar el sello?">
+              Un sello básico, sí. Por eso no te prometemos lo imposible. La verdad vive en el registro: las fotos huella para comparar el
+              cuadro, un código de dueño que solo sirve una vez y un historial donde cada evento lleva la huella del anterior. Si alguien
+              cambia uno, la cadena deja de cuadrar.
+            </Pregunta>
+            <Pregunta pregunta="¿Por qué no es un NFT?">
+              Lo evaluamos. Un NFT protege el registro, que ya está protegido, y no el sello, que es lo que se puede copiar. Además obliga a
+              tu comprador a manejar una cartera digital, y el arte en NFT cayó más de 90% desde 2021. Tomamos solo la idea buena: un
+              registro que delata cualquier cambio.
+            </Pregunta>
+            <Pregunta pregunta="¿Quién ve los datos de mi comprador?">
+              En el diseño: tú, y el equipo que opera Brai solo para dar soporte. En la página pública el dueño aparece con sus iniciales. Su
+              correo solo existe si él decide reclamar la obra y compartirlo. En esta demo no se guarda ningún correo real: solo aceptamos
+              correos inventados y se quedan en tu navegador.
+            </Pregunta>
+            <Pregunta pregunta="¿Y si un día me voy de Brai?">
+              Lo que proponemos: te llevas todo lo registrado, fichas, fotos, historias y dueños. La función para descargarlo todavía no está
+              construida.
+            </Pregunta>
+            <Pregunta pregunta="¿Esto ya funciona?">
+              Todavía no. Es un prototipo de estudiantes para enseñar la idea y escuchar a artistas. No hay cuentas, no se mandan correos y los
+              sellos NFC no están funcionando. La lista completa está en la página <Link to="/demo" className="underline underline-offset-2">Qué es real</Link>.
+            </Pregunta>
+            <Pregunta pregunta="¿Qué gana quien compra mi obra?">
+              La historia contada por ti, una prueba de procedencia si algún día la revende o la hereda, y una línea directa contigo.
+            </Pregunta>
+          </div>
+        </section>
+
+        {/* Cierre */}
+        <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6 md:py-32">
+          <div className="revela flex flex-col items-start gap-8">
+            <Isotipo size={88} />
+            <h2 className="max-w-3xl font-display text-4xl font-semibold leading-[1.08] tracking-[-0.02em] sm:text-6xl">
+              Cada obra sabe de dónde viene.
+            </h2>
+            <Link
+              to="/recorrido"
+              className="inline-flex items-center gap-2 rounded-[10px] bg-terracota-btn px-6 py-3.5 font-semibold text-lienzo transition-colors hover:bg-terracota-hover"
+            >
+              Recorrer la demo en 5 minutos <ArrowRight size={18} />
+            </Link>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-linea">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 text-sm sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
+          <div>
+            <Logo />
+            <p className="mt-3 text-verde">Registro de propiedad y procedencia para artistas independientes.</p>
+            <p className="mt-4 font-mono text-xs text-verde">Proyecto de estudiantes para Business Shark 8°, 2026.</p>
+          </div>
+          <nav aria-label="Brai" className="flex flex-col gap-2">
+            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-verde">Brai</p>
+            <Link to={`/o/${OBRA_DEMO.codigo}`} className="hover:underline">Obra de ejemplo</Link>
+            <Link to={`/a/${ARTISTA.slug}`} className="hover:underline">Página de artista</Link>
+            <Link to="/panel" className="hover:underline">Panel de ejemplo</Link>
+            <Link to="/recorrido" className="hover:underline">Recorrido en 5 minutos</Link>
+            <Link to="/demo" className="hover:underline">Qué es real en la demo</Link>
+          </nav>
+          <nav aria-label="Más" className="flex flex-col gap-2">
+            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-verde">Más</p>
+            <Link to="/marca" className="hover:underline">Marca</Link>
+            <a href="/privacidad" className="hover:underline">Datos de la demo</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  )
+}

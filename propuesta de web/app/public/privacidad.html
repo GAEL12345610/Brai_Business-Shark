@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Datos de la demo · Brai</title>
+  <meta name="description" content="La demo de Brai no tiene servidor: lo que haces se queda en tu navegador. Qué se guarda y cómo borrarlo.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    :root{--tinta:#2B2622;--lienzo:#F6F1EA;--verde:#5E6C52;--btn:#A2563D}
+    body{margin:0;background:var(--lienzo);color:var(--tinta);font:17px/1.65 "Schibsted Grotesk",system-ui,sans-serif}
+    main{max-width:42rem;margin:0 auto;padding:56px 16px}
+    a{color:var(--btn)} .marca{display:flex;gap:10px;align-items:center;color:var(--tinta);text-decoration:none;font:600 1.25rem Georgia,serif}
+    .etiqueta{font:12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--verde);margin-top:48px}
+    h1{font:600 2rem/1.15 Georgia,serif;margin:12px 0 0;letter-spacing:-.015em}
+    .caja{background:#fff;border-left:3px solid var(--btn);padding:4px 16px;margin-top:24px}
+    .borrador{color:#5b534c;border:1px dashed #b9ad9c;padding:4px 16px}
+    code{font:15px ui-monospace,monospace}
+    .pie{font:12px ui-monospace,monospace;color:var(--verde);margin-top:56px}
+  </style>
+</head>
+<body>
+<main>
+  <a href="/" class="marca">
+    <img src="/brand/isotipo.svg" width="26" height="26" alt="">
+    Brai
+  </a>
+  <p class="etiqueta">Versión del 5 de noviembre de 2026</p>
+  <h1>Qué datos guarda esta demo</h1>
+
+  <div class="caja">
+    <p><strong>Hoy Brai es un prototipo sin servidor.</strong> No tenemos base de datos conectada, no recibimos tus datos y no mandamos correos. Todavía no existe un correo de contacto del proyecto.</p>
+  </div>
+
+  <div>
+    <p><strong>Qué se guarda y dónde.</strong> Si reclamas una obra o registras una obra de prueba, eso se guarda solo en el almacenamiento local de tu navegador (localStorage). Sigue ahí aunque cierres la pestaña. Nadie más lo ve y no llega a nosotros.</p>
+
+    <p><strong>Qué datos te pedimos.</strong> Ninguno real. El formulario para reclamar solo acepta correos inventados que terminan en <code>@example.com</code>, un dominio reservado que no llega a nadie. Si registras una obra de prueba con foto, la foto se queda en tu navegador.</p>
+
+    <p><strong>Cómo borrarlo.</strong> Toca <strong>Reiniciar demo</strong> en el aviso negro de arriba de cualquier página, o borra los datos de este sitio en la configuración de tu navegador.</p>
+
+    <p><strong>Quién es responsable.</strong> Brai es un proyecto de estudiantes de secundaria para el concurso Business Shark 8°. El contacto del proyecto está pendiente: lo define el equipo con un adulto.</p>
+  </div>
+
+  <p class="etiqueta">Borrador para la versión real (no vigente)</p>
+  <div class="borrador">
+    <p>Cuando Brai guarde datos reales, el aviso tendrá que decir, como mínimo: quién es responsable y cómo contactarlo; qué datos se guardan (del comprador: nombre y correo; del artista: nombre, correo, biografía y fotos de sus obras; y cuántas veces se toca cada sello, sin saber quién); para qué (registrar quién es dueño de cada obra y que su artista pueda escribirle, nunca vender ni rentar datos); quién los ve (en público solo iniciales, el correo solo el artista de esa obra); dónde se guardan; y cómo pedir verlos, corregirlos o borrarlos.</p>
+    <p><strong>Antes de publicarlo falta:</strong> que exista el correo del proyecto, que un adulto lo revise y que la base de datos esté conectada y probada. Mientras eso no pase, este borrador no aplica a nadie.</p>
+  </div>
+
+  <p class="pie">Ley Federal de Protección de Datos Personales en Posesión de los Particulares.</p>
+</main>
+</body>
+</html>
