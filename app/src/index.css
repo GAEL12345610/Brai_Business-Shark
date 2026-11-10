@@ -124,3 +124,15 @@
   .punto-parpadea ellipse, .punto-parpadea circle, .punto-parpadea rect, .punto-flota, .punto-salta, .punto-brinca, .punto-saluda, .punto-pata-a, .punto-pata-b { animation: none !important; }
   .latido { display: flex; }
 }
+
+/* Portada editorial: la obra ocupa el lugar principal del archivo. */
+.archivo-portada { display:block; width:100%; max-width:470px; margin-inline:auto; padding:22px; border:1px solid var(--color-linea); background:var(--color-arena); }
+.archivo-indice,.archivo-pie { display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:10px; letter-spacing:.13em; }
+.archivo-marco { margin:22px 24px; padding:12px; background:var(--color-lienzo); transform:rotate(-3deg); transition:transform 600ms var(--ease-suave); }
+.archivo-marco img { width:100%; height:clamp(240px,34vw,390px); object-fit:cover; }
+.archivo-portada:hover .archivo-marco { transform:rotate(0); }
+.archivo-ficha { display:flex; align-items:center; justify-content:space-between; gap:16px; border-top:1px solid var(--color-tinta); padding-top:18px; }
+.archivo-pie { margin-top:28px; font-size:9px; color:var(--color-verde); }
+.skip-link { position:fixed; top:8px; left:8px; z-index:100; padding:12px 18px; background:var(--color-tinta); color:var(--color-lienzo); transform:translateY(-150%); }
+.skip-link:focus { transform:none; }
+@media (prefers-reduced-motion:reduce) { .archivo-marco { transform:none; } }

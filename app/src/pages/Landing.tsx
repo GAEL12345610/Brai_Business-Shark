@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import { ArrowRight, Check, X } from 'lucide-react'
-import { BarraProgreso, TarjetaTilt, Telefono3D } from '../components/movimiento'
+import { BarraProgreso, TarjetaTilt } from '../components/movimiento'
 import { Logo, SelloNFC, TarjetaDueno } from '../components/marca'
 import { Punto } from '../components/punto'
 import { Cifra, EscenaSello, LinkReclamarDemo, Pregunta, Raspadita } from '../components/interaccion'
@@ -69,6 +69,7 @@ export default function Landing() {
   const [raspada, setRaspada] = useState(false)
   return (
     <>
+      <a className="skip-link" href="#contenido">Saltar al contenido</a>
       <header className="sticky top-0 z-30 bg-lienzo">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6">
           <Logo />
@@ -83,7 +84,7 @@ export default function Landing() {
         <BarraProgreso />
       </header>
 
-      <main>
+      <main id="contenido">
         {/* Hero */}
         <section className="mx-auto grid max-w-6xl items-center gap-14 px-4 pb-20 pt-12 sm:px-6 md:grid-cols-[1.15fr_1fr] md:pt-20">
           <div>
@@ -115,9 +116,12 @@ export default function Landing() {
               <Link to="/demo" className="underline underline-offset-2">Qué hace la demo y qué no</Link>.
             </p>
           </div>
-          <div className="revela md:justify-self-end">
-            <Telefono3D src={`/o/${OBRA_DEMO.codigo}`} titulo={`Página de la obra ${OBRA_DEMO.titulo}`} />
-          </div>
+          <Link to={`/o/${OBRA_DEMO.codigo}`} className="archivo-portada" aria-label="Explorar la obra de ejemplo">
+            <span className="archivo-indice">ARCHIVO BRAI <span>DEMO 001</span></span>
+            <div className="archivo-marco"><img src={OBRA_DEMO.imagen} alt={`Obra de ejemplo: ${OBRA_DEMO.titulo}`} width="600" height="800" fetchPriority="high" /></div>
+            <div className="archivo-ficha"><div><p className="font-display text-2xl">{OBRA_DEMO.titulo}</p><p className="mt-1 text-sm text-tinta">{OBRA_DEMO.tecnica}</p></div><ArrowRight aria-hidden="true" size={24} /></div>
+            <span className="archivo-pie">EXPLORAR SU HISTORIA Y RECORRIDO</span>
+          </Link>
         </section>
 
         {/* El problema */}

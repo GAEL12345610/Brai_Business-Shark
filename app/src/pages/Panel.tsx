@@ -40,6 +40,12 @@ function Cifra({ valor, nombre, nota }: { valor: number; nombre: string; nota?: 
 export default function Panel() {
   const [version, setVersion] = useState(0)
   const filas = useMemo(() => panel(), [version])
+  const [busqueda, setBusqueda] = useState('')
+  const [estado, setEstado] = useState('todas')
+  const normalizar = (valor: string) => valor.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+  const visibles = filas.filter(({ obra, dueno }) =>
+    normalizar(`${obra.titulo} ${obra.registro} ${obra.codigo}`).includes(normalizar(busqueda.trim())) &&
+    (estado === 'todas' || (estado === 'con-dueno' ? Boolean(dueno) : !dueno)))
   const coleccionistas = filas.filter((f) => f.dueno)
   const toques = filas.reduce((s, f) => s + f.toques, 0)
   const primerNombre = ARTISTA.nombre.split(' ')[0]
@@ -223,8 +229,14 @@ export default function Panel() {
             </div>
           )}
 
+          <div className="mt-6 grid gap-4 sm:grid-cols-[1fr_220px]">
+            <label className="text-sm font-medium">Buscar en tu archivo<input type="search" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} placeholder="Título, registro o código" className="mt-2 block w-full rounded-lg border border-linea bg-lienzo px-4 py-3" /></label>
+            <label className="text-sm font-medium">Estado<select value={estado} onChange={(e) => setEstado(e.target.value)} className="mt-2 block w-full rounded-lg border border-linea bg-lienzo px-4 py-3"><option value="todas">Todas las obras</option><option value="con-dueno">Con dueño</option><option value="sin-dueno">Sin reclamar</option></select></label>
+          </div>
+          <p role="status" className="mt-3 text-sm text-verde">{visibles.length} de {filas.length} obras</p>
+          {visibles.length === 0 && <div className="my-6 border-l-2 border-terracota pl-4"><p>No encontramos obras con esos filtros.</p><button type="button" className="mt-2 text-terracota-btn underline" onClick={() => { setBusqueda(''); setEstado('todas') }}>Mostrar todas las obras</button></div>}
           <ul className="mt-5 divide-y divide-linea border-y border-linea">
-            {filas.map(({ obra, dueno, toques: t }) => (
+            {visibles.map(({ obra, dueno, toques: t }) => (
               <li key={obra.codigo} className="flex gap-4 py-4">
                 <img src={obra.imagen} alt="" className="h-20 w-16 shrink-0 rounded-sm object-cover" />
                 <div className="min-w-0 flex-1">
