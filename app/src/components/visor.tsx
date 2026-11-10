@@ -1,15 +1,28 @@
-import { useEffect, useState, type PointerEvent, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { Check, Share2, X, ZoomIn } from 'lucide-react'
 
 /** Capa a pantalla completa. Cierra con Escape, con la X o tocando el fondo. */
 export function Capa({ abierta, alCerrar, titulo, children }: { abierta: boolean; alCerrar: () => void; titulo: string; children: ReactNode }) {
+  const dialogo = useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (!abierta) return
-    const tecla = (e: KeyboardEvent) => e.key === 'Escape' && alCerrar()
+    const anterior = document.activeElement as HTMLElement | null
+    dialogo.current?.focus()
+    const tecla = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') alCerrar()
+      if (e.key !== 'Tab') return
+      const elementos = Array.from(dialogo.current?.querySelectorAll<HTMLElement>('button, a[href], input, [tabindex="0"]') ?? [])
+      const primero = elementos[0]
+      const ultimo = elementos[elementos.length - 1]
+      if (!primero) { e.preventDefault(); return }
+      if (e.shiftKey && (document.activeElement === primero || document.activeElement === dialogo.current)) { e.preventDefault(); ultimo.focus() }
+      else if (!e.shiftKey && (document.activeElement === ultimo || document.activeElement === dialogo.current)) { e.preventDefault(); primero.focus() }
+    }
     const antes = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', tecla)
     return () => {
+      anterior?.focus()
       document.body.style.overflow = antes
       window.removeEventListener('keydown', tecla)
     }
@@ -17,7 +30,7 @@ export function Capa({ abierta, alCerrar, titulo, children }: { abierta: boolean
 
   if (!abierta) return null
   return (
-    <div role="dialog" aria-modal="true" aria-label={titulo} className="capa fixed inset-0 z-50 flex flex-col bg-tinta/95 text-lienzo" onClick={alCerrar}>
+    <div ref={dialogo} tabIndex={-1} role="dialog" aria-modal="true" aria-label={titulo} className="capa fixed inset-0 z-50 flex flex-col bg-tinta/95 text-lienzo" onClick={alCerrar}>
       <div className="flex items-center justify-between px-4 py-3">
         <p className="font-mono text-xs uppercase tracking-[0.14em] text-lienzo/70">{titulo}</p>
         <button type="button" onClick={alCerrar} aria-label="Cerrar" className="grid size-10 place-items-center rounded-full bg-lienzo/10 hover:bg-lienzo/20">
