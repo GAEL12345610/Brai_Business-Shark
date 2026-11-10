@@ -142,7 +142,12 @@ const CLAVE = 'brai-demo-reclamos'
 
 function leerReclamos(): Record<string, { iniciales: string; fecha: string }> {
   try {
-    return JSON.parse(sessionStorage.getItem(CLAVE) ?? '{}')
+    const parsed: unknown = JSON.parse(sessionStorage.getItem(CLAVE) ?? '{}')
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {}
+    return Object.fromEntries(Object.entries(parsed).filter(([key, value]) =>
+      OBRAS.some((obra) => obra.codigo === key) && value &&
+      typeof value.iniciales === 'string' && value.iniciales.length <= 12 &&
+      typeof value.fecha === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value.fecha)))
   } catch {
     return {}
   }
@@ -200,7 +205,7 @@ export function reclamar(codigoObra: string, codigoDueno: string, correo: string
   if (!obra) return { ok: false, error: 'No encontramos esta obra.' }
   if (obra.dueno) return { ok: false, error: 'Esta obra ya tiene dueño. Si es tuya y la compraste de segunda mano, pídele al dueño anterior que te la transfiera.' }
   intentos[obra.codigo] = (intentos[obra.codigo] ?? 0) + 1
-  if (intentos[obra.codigo] > 5) return { ok: false, error: 'Demasiados intentos. Espera una hora y vuelve a probar.' }
+  if (intentos[obra.codigo] > 5) return { ok: false, error: 'Demasiados intentos. Esta prueba llegó al límite. Recarga para reiniciar los intentos de la demo.' }
   const limpio = codigoDueno.toUpperCase().replace(/[^A-Z0-9]/g, '')
   if (limpio !== CODIGO_DEMO.replace('-', '')) return { ok: false, error: 'Ese código no coincide. Revisa la tarjeta: son 8 letras y números.' }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) return { ok: false, error: 'Revisa tu correo, parece que le falta algo.' }
@@ -210,7 +215,7 @@ export function reclamar(codigoObra: string, codigoDueno: string, correo: string
     todos[obra.codigo] = { iniciales: ini, fecha: new Date().toISOString().slice(0, 10) }
     sessionStorage.setItem(CLAVE, JSON.stringify(todos))
   } catch {
-    // Sin storage la demo sigue: solo no recuerda el reclamo al recargar.
+    return { ok: false, error: "No pudimos guardar la prueba. Habilita el almacenamiento de esta pestaña e inténtalo de nuevo." }
   }
   return { ok: true, iniciales: ini }
 }

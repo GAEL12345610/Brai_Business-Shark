@@ -49,3 +49,5 @@ description: <una línea: qué hacer / qué no hacer>
 
 <qué pasó, por qué importa y cómo aplicarlo>
 ```
+
+- [demo-no-confirma-propiedad](demo-no-confirma-propiedad.md): No confirmar propiedad ni notificaciones en una demo local.

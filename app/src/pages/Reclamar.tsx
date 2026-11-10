@@ -51,13 +51,12 @@ export default function Reclamar() {
         <main className="mx-auto flex max-w-md flex-col items-start px-4 pb-16 pt-14 sm:px-6">
           <SelloDorado />
           <p className="mt-8 font-mono text-xs uppercase tracking-[0.16em] text-verde">{obra.registro}</p>
-          <h1 className="mt-2 font-display text-[2.4rem] font-semibold leading-[1.05] tracking-[-0.015em]">Esta obra ya es tuya.</h1>
+          <h1 className="mt-2 font-display text-[2.4rem] font-semibold leading-[1.05] tracking-[-0.015em]">Reclamo de prueba completado.</h1>
           <p className="mt-4 text-lg leading-relaxed text-tinta/85">
             <span className="font-display italic">{obra.titulo}</span> quedó registrada a nombre de{' '}
-            <span className="font-semibold">{listo}</span> el {fecha(new Date().toISOString().slice(0, 10))}. {ARTISTA.nombre} ya sabe
-            que la tienes tú.
+            <span className="font-semibold">{listo}</span> el {fecha(new Date().toISOString().slice(0, 10))}. Este resultado solo existe en esta pestaña. No se notificó a ningún artista.
           </p>
-          <p className="mt-3 text-sm text-tinta/70">El código de tu tarjeta ya no sirve. Guárdala: es parte de la obra.</p>
+          <p className="mt-3 text-sm text-tinta/70">No acredita propiedad real. Al cerrar la pestaña se elimina este reclamo.</p>
           <Link
             to={`/o/${obra.codigo}`}
             className="mt-9 inline-flex items-center justify-center rounded-[10px] bg-[var(--acento-texto)] px-6 py-3.5 font-semibold text-lienzo hover:opacity-90"
@@ -86,7 +85,7 @@ export default function Reclamar() {
           </div>
         </div>
 
-        <h1 className="mt-8 font-display text-[2.2rem] font-semibold leading-[1.05] tracking-[-0.015em]">Reclama tu obra</h1>
+        <h1 className="mt-8 font-display text-[2.2rem] font-semibold leading-[1.05] tracking-[-0.015em]">Prueba el reclamo</h1>
         <p className="mt-3 leading-relaxed text-tinta/85">
           Raspa la tarjeta que te entregó {ARTISTA.nombre} y escribe el código. Es de un solo uso: si la raspadita ya venía
           raspada, avísale al artista.
@@ -129,11 +128,11 @@ export default function Reclamar() {
                   setError(null)
                 }}
                 autoComplete="email"
-                placeholder="tu@correo.com"
+                placeholder="visita@example.com" maxLength={254}
                 className="mt-2 w-full rounded-[10px] border-[1.5px] border-tinta/25 bg-white px-4 py-3.5 text-base focus:border-tinta focus:outline-none"
               />
               <p className="mt-2 text-[13px] leading-snug text-tinta/70">
-                Solo lo ve el artista. En la página pública apareces con tus iniciales.
+                Usa un correo ficticio, por ejemplo visita@example.com. Solo guardamos las iniciales en esta pestaña, no enviamos el correo.
               </p>
             </div>
             {error && (

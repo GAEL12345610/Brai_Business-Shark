@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import { ArrowRight, Check, X } from 'lucide-react'
-import { BarraProgreso, TarjetaTilt, Telefono3D } from '../components/movimiento'
+import { BarraProgreso, TarjetaTilt } from '../components/movimiento'
 import { Isotipo, Logo, SelloNFC, TarjetaDueno } from '../components/marca'
 import { Cifra, EscenaSello, LinkReclamarDemo, Pregunta, Raspadita } from '../components/interaccion'
 import { ARTISTA, CODIGO_DEMO, OBRAS } from '../data/demo'
@@ -71,6 +71,8 @@ export default function Landing() {
   const [raspada, setRaspada] = useState(false)
   return (
     <>
+      <a className="skip-link" href="#contenido">Saltar al contenido</a>
+      <p className="bg-tinta px-4 py-2 text-center text-xs text-lienzo">Prototipo interactivo. Obras y registros de ejemplo, sin propiedad real.</p>
       <header className="sticky top-0 z-30 bg-lienzo">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6">
           <Logo />
@@ -84,18 +86,18 @@ export default function Landing() {
         <BarraProgreso />
       </header>
 
-      <main>
+      <main id="contenido">
         {/* Hero */}
         <section className="mx-auto grid max-w-6xl items-center gap-14 px-4 pb-20 pt-12 sm:px-6 md:grid-cols-[1.15fr_1fr] md:pt-20">
           <div>
             <Kicker>Registro de obra para artistas independientes</Kicker>
             <h1 className="mt-5 font-display text-[2.6rem] font-semibold leading-[1.04] tracking-[-0.02em] sm:text-6xl lg:text-[4.4rem]">
-              <span className="block">Vendiste tu obra.</span>
-              <span className="block text-terracota-btn">¿Sabes dónde está hoy?</span>
+              <span className="block">La obra cambia de casa.</span>
+              <span className="block text-terracota-btn">Su historia se queda.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-tinta/85">
               Brai pone un sello detrás de cada cuadro. Quien acerque su celular ve la historia de la obra, que la registraste tú
-              y quién es su dueño. Y tú nunca pierdes de vista a quien te compró.
+              y quién es su dueño. Un registro que el artista y su comprador pueden mantener juntos.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
@@ -112,9 +114,12 @@ export default function Landing() {
               </a>
             </div>
           </div>
-          <div className="revela md:justify-self-end">
-            <Telefono3D src={`/o/${OBRA_DEMO.codigo}`} titulo={`Página de la obra ${OBRA_DEMO.titulo}`} />
-          </div>
+          <Link to={`/o/${OBRA_DEMO.codigo}`} className="archivo-portada group" aria-label="Explorar la obra de demostración">
+            <span className="archivo-indice">ARCHIVO BRAI <span>ESTUDIO 001</span></span>
+            <div className="archivo-marco"><img src={OBRA_DEMO.imagen} alt={`Ilustración de demostración: ${OBRA_DEMO.titulo}`} width="600" height="800" fetchPriority="high" /></div>
+            <div className="archivo-ficha"><div><p className="font-display text-2xl">{OBRA_DEMO.titulo}</p><p className="mt-1 text-sm text-verde">{OBRA_DEMO.tecnica}, {OBRA_DEMO.anio}</p></div><ArrowRight aria-hidden="true" size={24} /></div>
+            <span className="archivo-pie">UNA OBRA. SU HISTORIA. SU RECORRIDO.</span>
+          </Link>
         </section>
 
         {/* El problema */}
