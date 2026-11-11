@@ -6,8 +6,8 @@
 
 - Variante independiente en `/premium`, con fondo oscuro cálido y el naranja de Brai.
 - Logo y fuentes existentes, sin sustituir la identidad por otra marca.
-- Menos texto, espacio amplio, una acción principal por bloque y tarjetas con vidrio sutil.
-- Historia visual por pasos al hacer scroll. Movimiento reducido y transparencia reducida respetados.
+- Home con solo el logo. Debajo se recupera la información útil anterior, con menos repeticiones y tarjetas de vidrio sutiles.
+- Animaciones originales del problema y del celular que se acerca al NFC. Movimiento reducido y transparencia reducida respetados.
 - Se conservan las aclaraciones de demo, el estado de los precios y el guardado local.
 
 ## Comparar y conservar
@@ -18,6 +18,8 @@ El ZIP no se instaló como skill y sus scripts no se ejecutaron. Las funciones d
 
 ## Vista de la variante
 
-![Propuesta premium en escritorio](capturas/escritorio.png)
+![Home con solo el logo](capturas/home-solo-logo.png)
 
-[Vista en teléfono](capturas/movil.png)
+![Animación del NFC restaurada](capturas/nfc-restaurado.png)
+
+[Home en teléfono](capturas/home-logo-movil.png)
