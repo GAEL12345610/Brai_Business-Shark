@@ -4,7 +4,7 @@
 
 ## Aplicación en Brai
 
-- Variante independiente en `/premium`, con fondo oscuro cálido y el naranja de Brai.
+- Variante independiente en `/premium`, con fondo blanco y el naranja de Brai.
 - Logo y fuentes existentes, sin sustituir la identidad por otra marca.
 - Inicio con logo ampliado y botones como subtítulos. Debajo se recuperan la información útil anterior, «Lo que nos preguntan» y el cierre, con tarjetas de vidrio sutiles.
 - Animaciones originales del problema y del celular que se acerca al NFC. Movimiento reducido y transparencia reducida respetados.
@@ -18,9 +18,9 @@ El ZIP no se instaló como skill y sus scripts no se ejecutaron. Las funciones d
 
 ## Vista de la variante
 
-![Inicio con logo ampliado y subtítulos](capturas/inicio-con-subtitulos.png)
+![Inicio con logo ampliado y subtítulos](capturas/inicio-blanco.png)
 
-![Cierre recuperado](capturas/cierre-recuperado.png)
+![Referencia anterior del cierre, antes del cambio a blanco](capturas/cierre-recuperado.png)
 
 ![Animación del NFC restaurada](capturas/nfc-restaurado.png)
 

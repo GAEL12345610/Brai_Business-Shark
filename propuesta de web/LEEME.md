@@ -6,7 +6,7 @@ Esta carpeta contiene una versión independiente. No reemplaza `app/` ni modific
 
 **Variante premium para comparar:** https://chatgptdameunnombre-png.github.io/brai-propuesta-premium/premium
 
-La variante es opcional: no reemplaza la portada anterior. Su inicio muestra el logo ampliado con botones como subtítulos; debajo conserva el contenido, las animaciones originales, «Lo que nos preguntan» y el cierre de la versión anterior. Su código está en `app/src/pages/Premium.tsx` y `app/src/pages/premium.css`. El ZIP original de referencia está en `sugerencias de diseño premium/estilo-web-premium.zip`.
+La variante conserva fondo blanco, tipografía premium y naranja de Brai. La variante es opcional: no reemplaza la portada anterior. Su inicio muestra el logo ampliado con botones como subtítulos; debajo conserva el contenido, las animaciones originales, «Lo que nos preguntan» y el cierre de la versión anterior. Su código está en `app/src/pages/Premium.tsx` y `app/src/pages/premium.css`. El ZIP original de referencia está en `sugerencias de diseño premium/estilo-web-premium.zip`.
 
 ## Organización
 
