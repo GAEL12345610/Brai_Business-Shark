@@ -27,14 +27,14 @@ export default function Premium() {
     <div className="pr-page">
       <main>
         <section id="premium-inicio" className="pr-home" aria-label="Brai, inicio">
-          <h1 className="pr-logo-home"><Isotipo size={170} /><span>Brai</span></h1>
-        </section>
-        <nav className="pr-content-nav pr-container" aria-label="Secciones de Brai">
+          <h1 className="pr-logo-home"><Isotipo size={230} /><span>Brai</span></h1>
+        <nav className="pr-content-nav" aria-label="Secciones de Brai">
           <a href="#premium-como">Cómo funciona</a>
           <a href="#premium-artistas">Para artistas</a>
           <a href="#premium-precios">Precios</a>
           <Link to="/recorrido">Ver demo <ArrowUpRight size={14} aria-hidden="true" /></Link>
         </nav>
+        </section>
 
         <section className="pr-problem pr-container" aria-labelledby="pr-problem-title">
           <p className="pr-label">El problema</p>
@@ -84,10 +84,26 @@ export default function Premium() {
             <article className="pr-plan pr-glass"><span className="pr-label">Opción B · Alternativa en prueba</span><h3>Obra por obra</h3><p className="pr-price">$2,500 <span>MXN de arranque</span></p><p className="pr-plan-recurring">Después, $450 MXN por obra adicional.</p><ul><li>Página del artista.</li><li>5 obras con sello y tarjeta.</li><li>Sin mensualidad propuesta.</li></ul></article>
           </div>
           <div className="pr-founders"><span className="pr-label">Propuesta para artistas fundadores</span><p>Buscamos a los primeros 3 artistas para probarlo: registrar de 3 a 5 obras, arranque y 3 meses sin costo, a cambio de un caso documentado con permiso. Las condiciones posteriores todavía están por definir.</p></div>
-          <details className="pr-faq"><summary>¿Se puede copiar el sello?</summary><p>Un NFC básico, sí. Por eso la propuesta combina registro del artista, fotos de detalle, código bajo raspadita e historial. No prometemos una obra imposible de copiar.</p></details>
-          <details className="pr-faq"><summary>¿Esto ya es un servicio disponible?</summary><p>Todavía es un prototipo. La ficha, el reclamo y el panel usan datos de demostración. No hay cuentas, los sellos NFC no están conectados y no se envían correos. <Link to="/demo">Ver qué hace la demo.</Link></p></details>
-          <details className="pr-faq"><summary>¿Qué puede acreditar el registro?</summary><p>La propuesta busca documentar lo que registra el artista y el historial de la obra. No sustituye una prueba legal de propiedad ni garantiza autenticidad. Las fotos de detalle y los sellos forman parte del diseño previsto.</p></details>
-          <details className="pr-faq"><summary>¿Qué pasa con los datos del comprador?</summary><p>La demo solo acepta correos de prueba y guarda los cambios en este navegador. En la versión prevista, el contacto existiría únicamente si el comprador reclama su obra y comparte su correo. En público solo se mostrarían sus iniciales.</p></details>
+        </section>
+
+        <section className="pr-questions pr-container" aria-labelledby="pr-questions-title">
+          <div className="pr-questions-heading"><p className="pr-label">Preguntas</p><h2 id="pr-questions-title">Lo que<br /><em>nos preguntan.</em></h2></div>
+          <div>
+            <details className="pr-faq"><summary>¿Y si mi comprador no tiene NFC en su celular?</summary><p>Cada sello lleva también un QR. Un celular con cámara puede abrir la misma página de la obra, sin instalar una app.</p></details>
+            <details className="pr-faq"><summary>¿Se puede copiar el sello?</summary><p>Un NFC básico, sí. Por eso la propuesta combina registro del artista, fotos de detalle, código bajo raspadita e historial. No prometemos una obra imposible de copiar.</p></details>
+            <details className="pr-faq"><summary>¿Por qué no es un NFT?</summary><p>Queremos que el comprador abra la historia de su obra sin necesitar una cartera digital. La propuesta usa un registro de procedencia, fotos de detalle y un historial para documentar lo que registra el artista.</p></details>
+            <details className="pr-faq"><summary>¿Quién ve los datos de mi comprador?</summary><p>En el diseño previsto, el artista y el equipo de Brai para dar soporte. El contacto existiría solo si el comprador reclama su obra y comparte su correo; en público se mostrarían sus iniciales. La demo solo acepta correos de prueba y guarda los cambios en este navegador.</p></details>
+            <details className="pr-faq"><summary>¿Y si un día me voy de Brai?</summary><p>Proponemos que puedas llevarte las fichas, fotos, historias y registros de tus obras. La función para descargar esa información todavía no está construida.</p></details>
+            <details className="pr-faq"><summary>¿Esto ya funciona?</summary><p>Todavía es un prototipo de estudiantes. La ficha, el reclamo y el panel usan datos de demostración. No hay cuentas, los sellos NFC no están conectados y no se envían correos. <Link to="/demo">Ver qué hace la demo.</Link></p></details>
+            <details className="pr-faq"><summary>¿Qué gana quien compra mi obra?</summary><p>La historia contada por ti, una ficha con su procedencia y una forma de conservar el vínculo contigo si decide compartir su contacto.</p></details>
+            <details className="pr-faq"><summary>¿Qué puede acreditar el registro?</summary><p>La propuesta busca documentar lo que registra el artista y el historial de la obra. No sustituye una prueba legal de propiedad ni garantiza autenticidad. Las fotos de detalle y los sellos forman parte del diseño previsto.</p></details>
+          </div>
+        </section>
+
+        <section className="pr-ending pr-container">
+          <Isotipo size={88} />
+          <h2>Cada obra sabe<br /><em>de dónde viene.</em></h2>
+          <Link to="/recorrido" className="pr-button">Recorrer la demo en 5 minutos <ArrowRight size={18} aria-hidden="true" /></Link>
         </section>
 
       </main>
