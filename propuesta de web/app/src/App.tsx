@@ -13,6 +13,7 @@ import NoEncontrada from './pages/NoEncontrada'
 const Marca = lazy(() => import('./pages/Marca'))
 const Panel = lazy(() => import('./pages/Panel'))
 const Recorrido = lazy(() => import('./pages/Recorrido'))
+const Premium = lazy(() => import('./pages/Premium'))
 import Demo from './pages/Demo'
 import Entrar from './pages/Entrar'
 
@@ -23,6 +24,7 @@ export default function App() {
     <AvisoDemo />
     <Routes>
       <Route path="/" element={<Landing />} />
+      <Route path="/premium" element={<Suspense fallback={<p className="p-8">Abriendo propuesta premium.</p>}><Premium /></Suspense>} />
       {/* Los sellos NFC apuntan aquí, siempre en brai.art (docs/DECISIONES.md #12) */}
       <Route path="/o/:codigo" element={<Obra />} />
       <Route path="/o/:codigo/reclamar" element={<Reclamar />} />
