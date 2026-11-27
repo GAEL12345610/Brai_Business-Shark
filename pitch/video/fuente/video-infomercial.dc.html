@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Brai · Infomercial</title>
+<style>
+@font-face { font-family: Fraunces; src: url(assets/fuentes/fraunces-latin-opsz-normal.woff2) format('woff2'); font-weight: 100 900; font-display: block; }
+@font-face { font-family: Schibsted; src: url(assets/fuentes/schibsted-grotesk-latin-wght-normal.woff2) format('woff2'); font-weight: 400 900; font-display: block; }
+@font-face { font-family: Plex; src: url(assets/fuentes/ibm-plex-mono-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-display: block; }
+html, body { margin: 0; height: 100%; background: #171412; overflow: hidden; -webkit-font-smoothing: antialiased; }
+a { color: #A2563D; } a:hover { color: #C06E52; }
+</style>
+<script>
+window.OM_SCENES = '[{"name":"gancho","dur":5,"desc":"Sin voz. El logo del sello se dibuja con luz, el teléfono se acerca y la pantalla se enciende."},{"name":"el-artista","dur":8.1,"desc":"Una obra entra grande al centro, se aleja y se oscurece. ¿Sabes dónde está tu obra hoy?"},{"name":"las-dudas","dur":6.5,"desc":"Las tres obras con su sello de duda, una por pregunta."},{"name":"brai","dur":5.8,"desc":"El logo se dibuja y sube Brai. Corte al sello detrás del cuadro."},{"name":"el-toque","dur":6.8,"desc":"El teléfono toca el sello, salen ondas y se abre la página de la obra."},{"name":"registrada","dur":8.6,"desc":"FALTA VOZ i06. Cae el sello dorado Registrada por el artista, luego la tarjeta firmada y el dueño."},{"name":"el-artista-sabe","dur":5,"desc":"El panel del artista y el nuevo dueño aparece en la lista."},{"name":"cualquier-celular","dur":7.8,"desc":"Toca, escanea, escribe. Se encienden uno por uno."},{"name":"cierre","dur":5.2,"desc":"Fondo oscuro, el logo se dibuja y entra la frase. Prototipo de estudiantes y la dirección de la demo."}]';
+window.OM_PLAYBACK = '{"mode":"times","count":1}';
+</script>
+<script src="./plan-infomercial.js"></script>
+</helmet>
+<x-import component-from-global-scope="VideoInfomercial" from="./animations-v3.jsx ./brai-piezas.jsx ./video-infomercial.jsx" hint-size="100%,100%" style="position: fixed; inset: 0;"></x-import>
+</x-dc>
+</body>
+</html>

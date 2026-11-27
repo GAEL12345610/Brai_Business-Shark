@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Brai · Presentación completa</title>
+<style>
+@font-face { font-family: Fraunces; src: url(assets/fuentes/fraunces-latin-opsz-normal.woff2) format('woff2'); font-weight: 100 900; font-display: block; }
+@font-face { font-family: Schibsted; src: url(assets/fuentes/schibsted-grotesk-latin-wght-normal.woff2) format('woff2'); font-weight: 400 900; font-display: block; }
+@font-face { font-family: Plex; src: url(assets/fuentes/ibm-plex-mono-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-display: block; }
+html, body { margin: 0; height: 100%; background: #171412; overflow: hidden; -webkit-font-smoothing: antialiased; }
+a { color: #A2563D; } a:hover { color: #C06E52; }
+</style>
+<script>
+window.OM_SCENES = '[{"name":"portada","dur":5.4,"desc":"El logo se dibuja como trazo, sube Brai y las pinturas se mueven a los lados."},{"name":"problema","dur":14.2,"desc":"Fondo oscuro. Las tres obras entran una por una con su sello de duda."},{"name":"solucion","dur":9,"desc":"El teléfono se acerca al sello, salen ondas, se abre la obra y cae el sello dorado."},{"name":"pasos","dur":15.6,"desc":"La línea se dibuja y las cuatro tarjetas aparecen cuando la voz las nombra."},{"name":"sistema","dur":15.5,"desc":"Los cuatro bloques se encienden y un punto dorado viaja por las flechas."},{"name":"demo","dur":6.2,"desc":"El QR crece y los dos teléfonos entran girando con la web real."},{"name":"innovacion","dur":13.9,"desc":"Entra la web, luego el teléfono. La etiqueta dorada aparece al decir registrada por el artista."},{"name":"costo","dur":11.2,"desc":"Fondo oscuro. El número cuenta hasta 8.73 y la barra de colores se llena."},{"name":"costos-fijos","dur":11.4,"desc":"Las tres tarjetas se suman y el total aparece en la tarjeta oscura."},{"name":"precios","dur":18.9,"desc":"Las dos tarjetas entran girando, primero la A y luego la B."},{"name":"margen","dur":8.1,"desc":"Fondo oscuro. Los dos números cuentan y al final aparece el 98%."},{"name":"ganancia","dur":12.6,"desc":"Las barras crecen de un artista a quince. La más alta sube al final."},{"name":"mercado","dur":13.9,"desc":"Los tres números cuentan uno por uno, de izquierda a derecha."},{"name":"competencia","dur":12.5,"desc":"La tabla aparece renglón por renglón y el renglón de Brai se enciende al final."},{"name":"cierre","dur":5.4,"desc":"Fondo oscuro. El logo se dibuja y las palabras suben una por una."}]';
+window.OM_PLAYBACK = '{"mode":"times","count":1}';
+</script>
+<script src="./plan-completo.js"></script>
+</helmet>
+<x-import component-from-global-scope="VideoCompleto" from="./animations-v3.jsx ./brai-piezas.jsx ./video-completo.jsx" hint-size="100%,100%" style="position: fixed; inset: 0;"></x-import>
+</x-dc>
+</body>
+</html>

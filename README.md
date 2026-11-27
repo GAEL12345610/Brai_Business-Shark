@@ -12,6 +12,9 @@ https://braiart.vercel.app/
 ## PRESENTACIÓN (Canva, solo ver):
 https://canva.link/f6h2985tj3b7chg
 
+## VIDEOS:
+En **`pitch/video/`**: el infomercial (`Brai-infomercial.mp4`, 59 s) y la presentación narrada (`Brai-completo.mp4`, 2:54). Cómo cambiarlos y regrabarlos: `pitch/video/README.md`.
+
 ## PARA ABRIR SIN INSTALAR NADA:
 En la carpeta **`listo-para-abrir/`** están la web (`Brai-web.html`) y la presentación (`Brai-presentacion.html`) en un solo archivo cada una. Se bajan y se abren con doble clic, sin internet. Ver `listo-para-abrir/LEEME.md`.
 ---
