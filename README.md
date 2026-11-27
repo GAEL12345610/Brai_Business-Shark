@@ -11,6 +11,9 @@ https://braiart.vercel.app/
 
 ## PRESENTACIÓN (Canva, solo ver):
 https://canva.link/f6h2985tj3b7chg
+
+## PARA ABRIR SIN INSTALAR NADA:
+En la carpeta **`listo-para-abrir/`** están la web (`Brai-web.html`) y la presentación (`Brai-presentacion.html`) en un solo archivo cada una. Se bajan y se abren con doble clic, sin internet. Ver `listo-para-abrir/LEEME.md`.
 ---
 
 ## En 30 segundos

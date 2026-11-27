@@ -24,6 +24,8 @@ Rutas de la demo:
 | `/panel` | Panel del artista de ejemplo: quién tiene cada obra, avisar a coleccionistas (simulado), registrar obra de prueba. Sin login |
 | `/jose-luis` | Demo para José Luis Malo: sus obras reales con fuente (`docs/DEMO_JOSE_LUIS.md`). Salir: `/?salir-demo`. El modo vive en `localStorage` |
 
+Versión en un solo archivo: `pnpm portatil` arma `../listo-para-abrir/Brai-web.html`, que se abre con doble clic y sin internet (`scripts/portatil.mjs`).
+
 Rediseño del 26 nov 2026: se quitaron `/demo`, `/entrar`, `/recorrido`, `/marca` e `/imprimir`, la mascota en pantalla, las capas de confianza, el comparador de fotos huella y el video. Las animaciones de la portada usan GSAP, que se carga aparte para que la página de la obra abra ligera. Las pruebas piden Node 22.12 o posterior.
 
 Los reclamos y las obras registradas en la demo se guardan en `localStorage` de ese navegador: **siguen ahí aunque cierres la pestaña**, hasta tocar **Reiniciar demo** (aviso negro de arriba) o borrar los datos del sitio. Nada se manda a ningún servidor. Lo que es real y lo que no: `docs/DEMO_HONESTA.md`.

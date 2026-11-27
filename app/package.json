@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/verificar-dist.mjs",
     "preview": "vite preview",
+    "portatil": "vite build --mode portatil && node scripts/portatil.mjs",
     "test": "node --test supabase/functions/sello/sun.test.ts pruebas/demo.test.ts pruebas/demo-jose-luis.test.ts pruebas/claims.test.ts",
     "test:db": "bash supabase/pruebas/correr.sh"
   },
