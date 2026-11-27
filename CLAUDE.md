@@ -57,6 +57,7 @@ Eres **socio y consultor de negocio** del equipo (estilo Alex Hormozi + Euge Oll
 | Wireframes, estructura de cada pantalla y auditoría de diseño | `docs/wireframes/README.md`, `docs/wireframes/AUDITORIA.md` |
 | Por qué no NFT y la cadena de huellas | `docs/TOKENIZAR.md` |
 | Base de datos (tablas, RLS, reclamar, 424 DNA, cadena de huellas) y sus pruebas | `app/supabase/migrations/`, `app/supabase/pruebas/` |
+| **Videos terminados** (infomercial y presentación narrada), su fuente editable y cómo regrabarlos | `pitch/video/` (leer `pitch/video/README.md`) |
 | Guion y subtítulos del infomercial, clips | `pitch/infomercial_guion.md`, `pitch/infomercial.srt`, `pitch/clips/` |
 | La app (cómo correrla y publicarla) | `app/README.md` |
 | Lecciones aprendidas | `memoria/MEMORIA.md` |
@@ -104,4 +105,6 @@ Agentes: `app-security-auditor` (antes de publicar) y `app-perf-auditor` (si la 
 - **5 nov 2026, segunda parte:** estudio de mercado (`MERCADO.md`: markmy.art es gratis, Verisart subió su NFC a 4 USD), revisión desde 7 perspectivas (`PERSPECTIVAS.md`: faltan 8 entrevistas y una obra real con permiso para el 26 nov), deck del jurado de 14 láminas en `pitch/jurado-26nov/`, gráficas en `visuales/viabilidad/` y PDFs de los documentos en `visuales/documentos/`.
 - **5 nov 2026, tercera parte:** costos cotizados (~9.60 MXN por obra), Lean Canvas, capas de confianza en la página de la obra (P11), borradores de contacto y permiso para el adulto, animatic del infomercial, clip del sello regrabado y `visuales/regenerar-todo.sh` para regenerar todo lo derivado. `pnpm test` 36.
 - **6 nov 2026:** todo lo del 5 nov se unió a `main` por Pull Request y se publicó en `braiart.vercel.app`, a pedido de Gael. Falta que el equipo lo revise y lo pruebe en celulares reales (`TODO.md`, sección 0).
+- **26 nov 2026 (rama `rediseno-kiki`):** rediseño de la app centrado en verificar una obra por NFC o por código: portada nueva con la marca, sección para escribir el código, escena del sello con teléfono, galería de obras y página de la obra con el sello dorado primero. Se quitaron `/demo`, `/entrar`, `/recorrido`, `/marca`, `/imprimir` y la mascota en pantalla; se quedan reclamar, artista y panel. Presentación nueva de 15 láminas en `pitch/jurado-26nov/presentacion.html`, su PDF y su versión en Canva. `docs/COSTOS.md` ya trae la compra real de los NFC (8.73 MXN por obra). `pnpm test` 36 y `pnpm build` correctos. Pendiente: actualizar `app/scripts/e2e/` y `visuales/`, que todavía apuntan a las rutas viejas.
+- **27 nov 2026:** videos terminados en `pitch/video/`: infomercial de 59 s y presentación narrada de 2:54, con voz de ElevenLabs, música y sonidos por código y subtítulos. Se cambian editando `pitch/video/fuente/` y se regraban con `grabar.cjs` (`pitch/video/README.md`). **Pendiente principal: sacar los números reales.** Hoy solo el sello NFC es compra real; la lista está en `TODO.md`.
 - **Primer hito: propuesta final, 26 nov 2026.**

@@ -12,8 +12,9 @@ const debe = (html, texto, donde) => html.includes(texto) || fallas.push(`${dond
 const nunca = (html, re, donde) => re.test(html) && fallas.push(`${donde}: aparece ${re}`)
 
 debe(landing, 'Prototipo con personas, obras y correos ficticios', 'index.html (aviso de DEMO)')
-debe(landing, 'Recorrer la demo en 5 minutos', 'index.html (CTA principal)')
-debe(landing, 'Precio publicado, sin validar', 'index.html (estado del precio)')
+debe(landing, 'Verificar obra', 'index.html (CTA principal)')
+// La portada ya no muestra precios. Si vuelven, vuelve esta regla: debe decir 'Precio publicado, sin validar'.
+if (/\d MXN/.test(landing)) debe(landing, 'Precio publicado, sin validar', 'index.html (estado del precio)')
 debe(landing, 'registrar la procedencia de cada obra', 'index.html (frase de oferta)')
 nunca(landing, /Ver una obra registrada|Se paga con|pagan el primer año|hola@brai\.art|@ejemplo\.com/, 'index.html')
 debe(privacidad, 'sin servidor', 'privacidad.html')

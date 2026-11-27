@@ -1,21 +1,27 @@
 # Mesa de costos de Brai (para Viabilidad)
 
-**Actualizada: 5 nov 2026** (VOID, tarjetas y envío del 424 DNA cotizados en línea; antes, 31 oct). Los precios son de páginas públicas consultadas ese día: confirmar con captura antes de entregar.
+**Actualizada: 8 nov 2026**. NTAG213 actualizado con el comprobante facilitado y la cantidad de 100 stickers confirmada por el equipo. El resto conserva sus estimaciones anteriores.
+
+**Referencias previas: 5 nov 2026** (VOID, tarjetas y envío del 424 DNA cotizados en línea; antes, 31 oct). Los precios son de páginas públicas consultadas ese día: confirmar con captura antes de entregar.
 **Tipo de cambio:** 18.80 MXN por USD (FIX de Banxico del 30 oct 2026: 18.7962). **21 MXN por EUR** es supuesto: confirmar con el banco antes de entregar.
 Lo que dice `?` no se pudo cotizar en México todavía. **Antes del 26 nov alguien del equipo abre cada liga, toma captura de pantalla y la guarda** (los precios de MercadoLibre cambian).
 
 ## 1. Costo de una obra registrada
 
-### Versión 1: NTAG213 (los 50 stickers que ya tenemos)
+### Versión 1: NTAG213 (pedido de 100 stickers confirmado)
+
+Compra real: producto 162.16 MXN, descuento 8.19 MXN y envío 99.00 MXN. Total pagado: **252.97 MXN por 100 stickers**. Costo exacto por sticker: **2.5297 MXN**; presentado a dos decimales: **2.53 MXN**, incluido envío. Fuente: comprobante facilitado y cantidad confirmada por el equipo. No se incluyen datos personales del comprobante. El nombre del producto indica NTAG213; falta verificar físicamente con NFC Tools.
+
+Este precio corresponde al NTAG213 básico, no al NTAG 424 DNA.
 
 | Pieza | Costo por obra | De dónde sale |
 |---|---|---|
-| Sticker NFC NTAG213 | **3.40 MXN** | MercadoLibre México: lotes de 100 entre 238 y 337 MXN (oct 2026). Tomamos el caro. |
+| Sticker NFC NTAG213 | **2.53 MXN** | Compra real: 252.97 MXN / 100, incluido envío. Antes se estimaban 3.40 MXN. |
 | Etiqueta raspadita | **1.60 MXN** | MercadoLibre México: 300 etiquetas rascables en 477.80 MXN (también hay 300 en 119.82 con descuento). Tomamos el caro. |
 | Etiqueta antidesprendible (VOID) para el sello | **~0.70 MXN** | MercadoLibre México, 5 nov 2026: lotes de 500 hologramas VOID entre 208 y 349 MXN ([listado](https://listado.mercadolibre.com.mx/etiquetas-de-seguridad-void)). Tomamos el caro. Antes suponíamos 3.50 con un precio de Argentina. |
 | Tarjeta de dueño impresa | **~2.90 MXN** | 100 tarjetas en opalina: 130 MXN a una cara ([Pop México](https://popmexico.com.mx/products/tarjetas-de-presentacion-opalina-texturizada)) o 2.88 MXN por pieza a doble cara sin IVA ([Printec](https://printec.mx/papeleria/tarjetas-de-presentacion/)). Tomamos el caro. **Ojo:** cada tarjeta lleva un código distinto, y una imprenta normal imprime 100 iguales; lo realista es imprimir en casa sobre opalina. Imprenta física en Guadalajara: `?` (pedir cotización a Imprematic o Todo en Vinil GDL). |
 | QR impreso | **~1 MXN** | Se imprime en la misma hoja de etiquetas. |
-| **Total por obra** | **~9.60 MXN** | 3.40 + 1.60 + 0.70 + 2.90 + 1. El 31 oct era ~15 y el 10 oct ~20. |
+| **Total por obra** | **~8.73 MXN** | 2.5297 + 1.60 + 0.70 + 2.90 + 1 = 8.7297. Solo el NFC es compra comprobada; los otros materiales siguen estimados. |
 
 ### Versión 2: NTAG 424 DNA (sello que no se puede copiar)
 
@@ -27,7 +33,7 @@ Lo que dice `?` no se pudo cotizar en México todavía. **Antes del 26 nov algui
 | Resto (raspadita, VOID, tarjeta, QR) | ~6.20 MXN | Igual que la versión 1. |
 | **Total por obra** | **~31 MXN** con impuesto, ~25 sin él | 18.50 + 6.20 + 6.20. |
 
-**El dato que cambia todo:** el sello seguro cuesta ~21 MXN más que el barato (con impuesto), no 40 a 90 como creíamos. Ver `COMPETENCIA.md` sección 4.
+**El dato que cambia todo:** el sello seguro cuesta ~22 MXN más que el barato (con impuesto), no 40 a 90 como creíamos. Ver `COMPETENCIA.md` sección 4.
 
 ## 2. Costos fijos
 
@@ -52,7 +58,7 @@ Supuesto: el artista registra **10 obras al año** (5 en el arranque y 5 despué
 | **Año 1** | **19,380 MXN** | **4,750 MXN** |
 | **Año 2 en adelante** | **11,880 MXN** | **4,500 MXN** |
 | % de lo que vende el artista (10 obras de 12,000) | 16% el año 1, 10% después | 4% el año 1 y después |
-| Materiales (versión 1) | ~100 al año | ~100 al año |
+| Materiales (versión 1, 10 obras) | ~87.30 al año | ~87.30 al año |
 
 **La verdad sin suavizar:** B es mucho más fácil de vender (4% se parece a lo que ya pagan en comisiones de tarjeta, 16% no). Pero con B necesitas **4 veces más clientes** para ganar lo mismo. Ninguna de las dos está validada: la entrevista decide.
 
@@ -62,15 +68,15 @@ Costo fijo comercial: 10,550 MXN al año.
 
 | Clientes | Oferta A ingreso | Oferta A utilidad | Oferta B ingreso | Oferta B utilidad |
 |---|---|---|---|---|
-| 1 | 19,380 | **8,680** | 4,750 | **-5,950** |
-| 5 | 96,900 | **85,600** | 23,750 | **12,450** |
-| 15 | 290,700 | **277,900** | 71,250 | **58,450** |
+| 1 | 19,380 | **8,742.70** | 4,750 | **-5,887.30** |
+| 5 | 96,900 | **85,913.50** | 23,750 | **12,763.50** |
+| 15 | 290,700 | **278,840.50** | 71,250 | **59,390.50** |
 
-(Utilidad = ingreso − 10,550 − materiales de 150 por cliente.)
+(Resultado antes de horas, transporte, impuestos y otros gastos = ingreso − 10,550 − materiales de 87.30 por cliente, para 10 obras. Se usa 8.73 por obra, redondeado. La tabla anterior usaba 150 por cliente sin coincidir con las 10 obras del supuesto.)
 
 **Punto de equilibrio:**
 - Oferta A: **1 cliente** cubre la infraestructura (990 > 880 al mes).
-- Oferta B: **3 clientes** en el año 1 (3 × 4,750 = 14,250 > 10,550 + 450).
+- Oferta B: **3 clientes** en el año 1 (3 × 4,750 = 14,250 > 10,550 + 261.90).
 
 **Lo que NO está contado (y un buen profesor lo va a preguntar):** las horas del equipo. Un setup son ~8 horas (fotos, fichas, grabar sellos, imprimir). 5 clientes = ~40 horas. Si a esas horas les ponemos un precio de 100 MXN la hora, son 4,000 MXN: con Oferta A sigue ganando, con Oferta B se come un tercio de la utilidad.
 

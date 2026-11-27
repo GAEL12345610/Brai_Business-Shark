@@ -8,6 +8,15 @@ Proyecto para **Business Shark 8°**. Primera entrega: **26 de noviembre de 2026
 ---
 ## LINK PARA LA DEMO: 
 https://braiart.vercel.app/
+
+## PRESENTACIÓN (Canva, solo ver):
+https://canva.link/f6h2985tj3b7chg
+
+## VIDEOS:
+En **`pitch/video/`**: el infomercial (`Brai-infomercial.mp4`, 59 s) y la presentación narrada (`Brai-completo.mp4`, 2:54). Cómo cambiarlos y regrabarlos: `pitch/video/README.md`.
+
+## PARA ABRIR SIN INSTALAR NADA:
+En la carpeta **`listo-para-abrir/`** están la web (`Brai-web.html`) y la presentación (`Brai-presentacion.html`) en un solo archivo cada una. Se bajan y se abren con doble clic, sin internet. Ver `listo-para-abrir/LEEME.md`.
 ---
 
 ## En 30 segundos
@@ -70,13 +79,10 @@ Todo lo pendiente, con quién lo hace y dónde, vive en **[`TODO.md`](TODO.md)**
 ## Rutas de la app (mismo link de Vercel)
 | Ruta | Qué es |
 |---|---|
-| `/` | Landing |
-| `/demo` | Qué hace la demo y qué no |
-| `/o/7KQ2X` | Página de una obra de ejemplo (código público de la demo `4K7P-9QX2`, correo que termine en `@example.com`) |
+| `/` | Portada: la marca, verificar una obra con su código y galería de obras de ejemplo |
+| `/o/7KQ2X` | Página de una obra de ejemplo, la que abre el sello NFC (código público de la demo `4K7P-9QX2`, correo que termine en `@example.com`) |
+| `/o/7KQ2X/reclamar` | Reclamar la obra con el código de dueño (simulado) |
 | `/a/ejemplo` | Página de la artista de ejemplo |
 | `/panel` | Panel del artista (ejemplo) |
 | `/jose-luis` | **Demo para José Luis Malo** con sus obras reales (`docs/DEMO_JOSE_LUIS.md`). Salir: `/?salir-demo` |
-| `/recorrido?para=Nombre` | Recorrido de 5 minutos para enseñárselo a un artista |
-| `/marca` | Kit de marca vivo y la mascota Punto |
-| `/imprimir/7KQ2X` | Tarjeta, sello y QR en tamaño real |
 | `/privacidad` | Qué datos guarda la demo (ninguno sale del navegador) y borrador del aviso real, no vigente |

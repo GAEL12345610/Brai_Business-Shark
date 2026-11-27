@@ -8,6 +8,10 @@
 | `deck.pdf` | El mismo deck en PDF, para la Chromebook o para imprimir |
 | `lean-canvas.html` y `lean-canvas.pdf` | El modelo de negocio en una hoja carta horizontal. Cada bloque dice si es dato, supuesto o pendiente |
 | `qr-demo.svg` | QR a `braiart.vercel.app/recorrido` (lámina 6) |
+| `presentacion.html` | Presentación animada de 15 láminas, más imagen que texto, para explicarla de viva voz: problema, solución, sistema, demo, costo por obra, costo fijo, precios, margen, ganancia por escenario, mercado y competencia. Usa las capturas de `img/`. Flechas o clic para avanzar, F para pantalla completa |
+| Presentación en Canva | La misma presentación, con transición entre láminas, para verla desde cualquier Chromebook: https://canva.link/f6h2985tj3b7chg |
+| `presentacion.pdf` | La misma presentación en PDF. Se regenera con `node pitch/jurado-26nov/exportar-presentacion.cjs` |
+| `qr-inicio.svg` | QR a `braiart.vercel.app` (lámina 6 de la presentación) |
 | `exportar.cjs` | Regenera los PDF y el PNG del canvas: `node pitch/jurado-26nov/exportar.cjs` |
 | `../../visuales/viabilidad/` | Las dos gráficas en PNG |
 

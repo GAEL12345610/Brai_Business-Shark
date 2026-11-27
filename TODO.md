@@ -7,6 +7,30 @@ Cómo leer esto: **Para quién** dice si lo hace Ricardo, el equipo o un adulto.
 
 ---
 
+## Sacar los números reales (27 nov 2026)
+
+**Hoy el único número real es el del sello NFC: $2.53 por sello (se compraron 100 por $252.97).** Todo lo demás que sale en la presentación (`pitch/jurado-26nov/presentacion.html`), en los videos (`pitch/video/`) y en `docs/COSTOS.md` es estimado, supuesto o proyección. Hay que conseguir el dato real de cada uno y cambiarlo en su documento dueño. Cómo cambiarlo después en los videos: `pitch/video/README.md`.
+
+| | Número | Hoy dice | Qué es hoy | Cómo sacar el real | Para quién |
+|---|---|---|---|---|---|
+| [x] | Sello NFC | $2.53 | **Real**: compra de 100 por $252.97 | Falta confirmar el tipo de chip con NFC Tools | Equipo |
+| [ ] | Tarjeta de dueño | $2.90 | Estimado de páginas en línea | Cotizar en una imprenta de Guadalajara o imprimir una hoja de prueba y dividir | Equipo con adulto |
+| [ ] | Etiqueta | $1.60 | Estimado de MercadoLibre | Comprar un paquete o tomar captura del precio el día de la compra | Equipo con adulto |
+| [ ] | QR impreso | $1.00 | Supuesto | Imprimir una hoja de etiquetas y dividir el costo entre las que salen | Equipo |
+| [ ] | Etiqueta VOID | $0.70 | Estimado de MercadoLibre | Comprar un paquete o tomar captura del precio el día de la compra | Equipo con adulto |
+| [ ] | Costo por obra | $8.73 | Suma de lo de arriba | Se vuelve a sumar cuando estén los cuatro reales | Equipo |
+| [ ] | Servidor y base de datos | $376 y $470 al mes | Precio de lista en dólares, pasado a pesos | Confirmar el plan que de verdad se usaría y el tipo de cambio del día | Ricardo |
+| [ ] | Dominio | $49 el primer año, $395 al renovar | Precio visto en línea | Se confirma al comprar `brai.art` | Adulto |
+| [ ] | Precios A y B | $7,500 más $990 al mes, o $2,500 más $450 por obra | En prueba: nadie ha pagado | Entrevistas con artistas: cuál escogen y cuánto pagarían | Equipo con adulto |
+| [ ] | Obras por artista al año | 10 | Supuesto | Preguntarlo en cada entrevista | Equipo con adulto |
+| [ ] | Horas por artista | 13 | Supuesto | Tomar el tiempo en el primer registro de verdad | Equipo |
+| [ ] | Ganancia del año 1 | hasta $278,841 con 15 artistas | Proyección hecha con los supuestos de arriba | Se recalcula cuando cambien el costo, el precio y las obras por año | Equipo |
+| [ ] | Posibles clientes | 177 | Supuesto: 2% de 8,870 artistas de Jalisco | Entrevistas y una fuente que diga cuántos venden obra original | Equipo |
+
+Cuando un número cambie: primero en `docs/COSTOS.md` o `docs/OFERTA.md`, luego en `pitch/video/guion/numeros.md`, y de ahí a la presentación y a los videos.
+
+---
+
 ## 0. Revisar el trabajo del 5 nov (publicado el 6 nov)
 
 Claude dejó la demo diciendo la verdad sobre sí misma, el paquete de la reunión y los materiales del 26 nov. **Se unió a `main` y se publicó en `braiart.vercel.app` el 6 nov 2026, a pedido de Gael.** Falta que el equipo lo revise: si algo no les gusta, se cambia y se vuelve a publicar.

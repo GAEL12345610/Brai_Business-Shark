@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "tsc && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/verificar-dist.mjs",
     "preview": "vite preview",
+    "portatil": "vite build --mode portatil && node scripts/portatil.mjs",
     "test": "node --test supabase/functions/sello/sun.test.ts pruebas/demo.test.ts pruebas/demo-jose-luis.test.ts pruebas/claims.test.ts",
     "test:db": "bash supabase/pruebas/correr.sh"
   },
@@ -21,6 +22,7 @@
     "@fontsource-variable/fraunces": "^5.3.0",
     "@fontsource-variable/schibsted-grotesk": "^5.3.0",
     "@fontsource/ibm-plex-mono": "^5.3.0",
+    "gsap": "^3.15.1",
     "lucide-react": "^1.65.0",
     "qrcode": "^1.5.4",
     "react": "^19.3.1",

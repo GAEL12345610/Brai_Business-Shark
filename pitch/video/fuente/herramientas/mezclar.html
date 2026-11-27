@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Brai · Rehacer la mezcla de audio</title>
+<style>
+body { font: 17px/1.5 system-ui, sans-serif; background: #F6F1EA; color: #2B2622; max-width: 720px; margin: 60px auto; padding: 0 24px; }
+button { font: inherit; padding: 10px 20px; border-radius: 99px; border: 0; background: #A2563D; color: #F6F1EA; cursor: pointer; margin-right: 10px; }
+pre { background: #E9E1D4; padding: 14px; border-radius: 12px; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<h1>Rehacer la mezcla</h1>
+<p>Úsala cuando cambies una voz o una duración. Lee <code>OM_SCENES</code> del .dc.html, el plan y las voces de <code>audio/</code>, y descarga el .wav. Guárdalo en <code>audio/</code> con el mismo nombre. Necesita abrirse desde un servidor local (por ejemplo <code>npx serve</code> en la carpeta del proyecto), no con doble clic.</p>
+<button id="info">infomercial-mezcla.wav</button><button id="comp">completo-mezcla.wav</button>
+<pre id="log">Listo.</pre>
+<script src="../mezcla.js"></script>
+<script src="../plan-infomercial.js"></script>
+<script src="../plan-completo.js"></script>
+<script>
+const log = (m) => { document.getElementById('log').textContent += '\n' + m; };
+async function hacer(dc, plan, nombre) {
+  const ctx = new AudioContext({ sampleRate: 44100 });
+  const html = await (await fetch('../' + dc)).text();
+  const scenes = html.match(/window\.OM_SCENES = '([^']+)'/)[1];
+  const cargar = async (ruta) => {
+    const r = await fetch('../' + ruta); if (!r.ok) return null;
+    const b = await ctx.decodeAudioData(await r.arrayBuffer()); return b.getChannelData(0);
+  };
+  log('Mezclando ' + nombre + '…');
+  const r = await BraiMezcla.mezclar({ scenes, plan, cargar, sr: 44100 });
+  if (r.faltan.length) log('Faltan voces: ' + r.faltan.join(', '));
+  const url = URL.createObjectURL(new Blob([BraiMezcla.wav(r.datos, r.sr)], { type: 'audio/wav' }));
+  const a = document.createElement('a'); a.href = url; a.download = nombre; a.click();
+  log(nombre + ' listo, ' + r.total + ' s.');
+}
+document.getElementById('info').onclick = () => hacer('video-infomercial.dc.html', window.BRAI_PLAN_INFO, 'infomercial-mezcla.wav');
+document.getElementById('comp').onclick = () => hacer('video-completo.dc.html', window.BRAI_PLAN_COMPLETO, 'completo-mezcla.wav');
+</script>
+</body>
+</html>
