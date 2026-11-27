@@ -14,20 +14,20 @@ export default function Artista() {
 
   return (
     <PaginaArtista>
-      <main className="mx-auto max-w-5xl px-4 pb-16 pt-10 sm:px-6">
-        <section className="entra max-w-2xl">
-          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-verde">{ARTISTA.disciplina}</p>
-          <h1 className="mt-2 font-display text-5xl font-semibold leading-[1.02] tracking-[-0.02em] sm:text-6xl">
+      <main className="mx-auto max-w-6xl px-4 pb-20 pt-14 sm:px-6">
+        <section className="entra max-w-3xl">
+          <p className="rotulo text-verde">{ARTISTA.disciplina}</p>
+          <h1 className="titular mt-4">
             {ARTISTA.nombre}
             {ES_FICTICIA && <Ficticio>Ficticia</Ficticio>}
           </h1>
-          <p className="mt-2 font-mono text-xs text-verde">{ARTISTA.ciudad}</p>
+          <p className="mt-4 font-mono text-base text-verde">{ARTISTA.ciudad}</p>
           {ARTISTA.ejemplo && (
             <p className="mt-3 font-mono text-[10px] text-verde">
               {MODO_JOSE_LUIS ? 'Datos de fuentes públicas, por confirmar con él. En la versión real lo escribe el artista.' : 'Texto de ejemplo. Lo escribe el artista.'}
             </p>
           )}
-          <div className="mt-4 space-y-3 text-lg leading-relaxed text-tinta/85">
+          <div className="cuerpo-g mt-6 space-y-4 text-tinta/85">
             {ARTISTA.bio.map((p) => (
               <p key={p}>{p}</p>
             ))}
@@ -46,31 +46,31 @@ export default function Artista() {
               .
             </p>
           )}
-          <dl className="mt-8 flex gap-10 border-t border-linea pt-5">
+          <dl className="mt-10 flex gap-14 border-t border-tinta/15 pt-7">
             <div>
-              <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-verde">{MODO_JOSE_LUIS ? 'Obras en la demo' : 'Obras de ejemplo'}</dt>
-              <dd className="mt-1 font-display text-4xl font-semibold">{obras.length}</dd>
+              <dt className="rotulo text-verde">{MODO_JOSE_LUIS ? 'Obras en la demo' : 'Obras de ejemplo'}</dt>
+              <dd className="mt-2 font-display text-7xl font-semibold leading-none text-[var(--acento-texto)]">{obras.length}</dd>
             </div>
             <div>
-              <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-verde">Con dueño</dt>
-              <dd className="mt-1 font-display text-4xl font-semibold">{conDueno}</dd>
+              <dt className="rotulo text-verde">Con dueño</dt>
+              <dd className="mt-2 font-display text-7xl font-semibold leading-none text-[var(--acento-texto)]">{conDueno}</dd>
             </div>
           </dl>
         </section>
 
-        <section className="mt-14">
+        <section className="mt-20">
           <Etiqueta>Obras</Etiqueta>
-          <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:gap-x-8">
+          <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-3 lg:gap-x-10">
             {obras.map((o, i) => (
               <Link key={o.codigo} to={`/o/${o.codigo}`} className="entra group" style={{ animationDelay: `${150 + i * 90}ms` }}>
-                <div className="overflow-hidden bg-[var(--acento)] p-2">
+                <div className="overflow-hidden bg-[var(--acento)] p-2 shadow-[0_40px_60px_-44px_rgba(43,38,34,.8)] transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:-translate-y-2 group-hover:scale-[1.03] sm:p-3">
                   <img src={o.imagen} alt="" className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
                 </div>
-                <p className="mt-3 font-display text-lg font-semibold leading-tight">{o.titulo}</p>
-                <p className="mt-1 font-mono text-[11px] text-verde">
+                <p className="mt-5 font-display text-2xl font-semibold leading-tight">{o.titulo}</p>
+                <p className="mt-1.5 font-mono text-sm text-verde">
                   {o.registro} · {o.tecnica} · {anioTexto(o)}
                 </p>
-                <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold">
+                <p className="mt-2.5 inline-flex items-center gap-2 text-base font-semibold">
                   <i className={`size-2 rounded-full ${o.dueno ? 'bg-[var(--acento)]' : 'bg-dorado'}`} />
                   {o.dueno ? `Con dueño, ${o.dueno}` : MODO_JOSE_LUIS ? 'Sin dueño registrado' : 'Ejemplo, sin reclamar'}
                 </p>
@@ -79,7 +79,7 @@ export default function Artista() {
           </div>
         </section>
       </main>
-      <footer className="mx-auto max-w-5xl px-4 pb-12 sm:px-6">
+      <footer className="mx-auto max-w-6xl px-4 pb-12 sm:px-6">
         <SelloRegistroBrai />
       </footer>
     </PaginaArtista>

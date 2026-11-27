@@ -16,17 +16,15 @@ Rutas de la demo:
 
 | Ruta | Qué es |
 |---|---|
-| `/` | Landing |
-| `/demo` | Qué hace la demo y qué no (a esta página lleva el aviso negro de DEMO) |
+| `/` | Portada: la marca, verificar una obra con su código o su número de registro, cómo funciona y galería de obras de ejemplo |
 | `/o/7KQ2X` | Obra de ejemplo sin reclamar. Código público de la demo: `4K7P-9QX2`, con un correo que termine en `@example.com` |
 | `/o/M3RT8` | Una obra que ya tiene dueño |
+| `/o/7KQ2X/reclamar` | Reclamar la obra con el código de dueño (simulado) |
 | `/a/ejemplo` | Página del artista (`/a/jose-luis-malo` con el candado abierto, ver abajo) |
-| `/imprimir/7KQ2X` | Tarjeta, sello y QR en tamaño real para imprimir |
 | `/panel` | Panel del artista de ejemplo: quién tiene cada obra, avisar a coleccionistas (simulado), registrar obra de prueba. Sin login |
-| `/entrar` | Dice que todavía no hay cuentas y lleva al panel de ejemplo |
 | `/jose-luis` | Demo para José Luis Malo: sus obras reales con fuente (`docs/DEMO_JOSE_LUIS.md`). Salir: `/?salir-demo`. El modo vive en `localStorage` |
-| `/recorrido?para=Nombre` | Recorrido de 5 pasos con calculadora de Oferta A y B. El nombre vive solo en esa pestaña |
-| `/marca` | Kit de marca vivo y la mascota Punto |
+
+Rediseño del 26 nov 2026: se quitaron `/demo`, `/entrar`, `/recorrido`, `/marca` e `/imprimir`, la mascota en pantalla, las capas de confianza, el comparador de fotos huella y el video. Las animaciones de la portada usan GSAP, que se carga aparte para que la página de la obra abra ligera. Las pruebas piden Node 22.12 o posterior.
 
 Los reclamos y las obras registradas en la demo se guardan en `localStorage` de ese navegador: **siguen ahí aunque cierres la pestaña**, hasta tocar **Reiniciar demo** (aviso negro de arriba) o borrar los datos del sitio. Nada se manda a ningún servidor. Lo que es real y lo que no: `docs/DEMO_HONESTA.md`.
 

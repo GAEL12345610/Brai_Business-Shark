@@ -82,40 +82,6 @@ export function VisorObra({ imagen, alt }: { imagen: string; alt: string }) {
   )
 }
 
-/**
- * Comparar una foto huella: el cuadro completo con el detalle marcado y el detalle en grande.
- * La huella se muestra con background-size 480% en un cuadro; aquí se calcula qué parte es.
- */
-export function CompararHuella({ imagen, x, y, nota }: { imagen: string; x: number; y: number; nota: string }) {
-  const ancho = 100 / 4.8
-  const alto = 100 / 6.4 // la obra es 3:4, así que a lo alto cabe menos
-  const izq = (x / 100) * (100 - ancho)
-  const arriba = (y / 100) * (100 - alto)
-  return (
-    <div className="mx-auto grid h-full max-w-4xl content-center gap-6 overflow-y-auto px-4 pb-8 sm:grid-cols-2">
-      <div>
-        <div className="relative mx-auto w-[min(100%,340px)] overflow-hidden">
-          <img src={imagen} alt="" className="block aspect-[3/4] w-full object-cover" />
-          <span
-            className="marca-huella absolute border-2 border-lienzo shadow-[0_0_0_9999px_rgba(43,38,34,.55)]"
-            style={{ left: `${izq}%`, top: `${arriba}%`, width: `${ancho}%`, height: `${alto}%` }}
-          />
-        </div>
-        <p className="mt-3 text-center text-sm text-lienzo/70">Dónde está en el cuadro</p>
-      </div>
-      <div>
-        <div
-          className="mx-auto aspect-square w-[min(100%,340px)] bg-no-repeat"
-          style={{ backgroundImage: `url(${imagen})`, backgroundSize: '480%', backgroundPosition: `${x}% ${y}%` }}
-          role="img"
-          aria-label={`Detalle: ${nota}`}
-        />
-        <p className="mx-auto mt-3 max-w-[340px] text-center text-sm text-lienzo/90">{nota}</p>
-      </div>
-    </div>
-  )
-}
-
 /** Compartir: el menú nativo del celular, o copia el link en computadora. */
 export function Compartir({ titulo, texto }: { titulo: string; texto: string }) {
   const [copiado, setCopiado] = useState(false)
@@ -141,7 +107,7 @@ export function Compartir({ titulo, texto }: { titulo: string; texto: string }) 
     <button
       type="button"
       onClick={compartir}
-      className="inline-flex items-center gap-2 rounded-[10px] border-[1.5px] border-tinta/80 px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-tinta/5"
+      className="inline-flex items-center gap-2.5 rounded-full border-[1.5px] border-tinta/70 px-5 py-3 text-base font-semibold transition-colors hover:bg-tinta hover:text-lienzo"
     >
       {copiado ? <Check size={16} /> : <Share2 size={16} />}
       {copiado ? 'Enlace copiado' : 'Compartir'}

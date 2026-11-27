@@ -3,9 +3,8 @@
 // Es la pantalla que le vende Brai al artista: aquí ve quién tiene cada obra.
 import { useMemo, useState, type FormEvent } from 'react'
 import { Link } from 'react-router'
-import { ArrowUpRight, Check, Mail, Plus, Printer } from 'lucide-react'
+import { ArrowUpRight, Check, Mail, Plus } from 'lucide-react'
 import { Logo } from '../components/marca'
-import { Punto } from '../components/punto'
 import { ARTISTA, ES_FICTICIA, CODIGO_DEMO, CORREO_PRUEBA, MODO_JOSE_LUIS, fecha, panel, registrarObra, type Obra } from '../data/demo'
 import { Ficticio } from '../components/demo'
 
@@ -30,8 +29,8 @@ async function achicar(archivo: File): Promise<string> {
 function Cifra({ valor, nombre, nota }: { valor: number; nombre: string; nota?: string }) {
   return (
     <div className="py-5 pr-4">
-      <dt className="text-sm text-tinta/70">{nombre}</dt>
-      <dd className="mt-1 font-mono text-3xl tabular-nums">{valor}</dd>
+      <dt className="text-base text-tinta/70">{nombre}</dt>
+      <dd className="mt-1 font-display text-6xl font-semibold leading-none tabular-nums text-terracota-btn">{valor}</dd>
       {nota && <dd className="mt-1 font-mono text-[10px] text-verde">{nota}</dd>}
     </div>
   )
@@ -61,15 +60,15 @@ export default function Panel() {
 
   return (
     <div className="min-h-[100dvh] bg-white">
-      <header className="border-b border-linea bg-lienzo">
+      <header className="sticky top-0 z-30 border-b border-linea bg-lienzo/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6">
           <div className="flex items-center gap-3">
             <Logo />
             <span className="hidden font-mono text-xs uppercase tracking-[0.14em] text-verde sm:inline">Panel</span>
           </div>
           <div className="flex items-center gap-4 text-sm font-medium">
-            <Link to="/recorrido" className="text-terracota-btn hover:underline">
-              Volver al recorrido
+            <Link to="/" className="text-terracota-btn hover:underline">
+              Inicio
             </Link>
             <Link to={`/a/${ARTISTA.slug}`} className="inline-flex items-center gap-1 text-terracota-btn hover:underline">
               Mi página <ArrowUpRight size={16} />
@@ -85,10 +84,10 @@ export default function Panel() {
       </p>
 
       <main className="mx-auto max-w-5xl px-4 pb-24 pt-10 sm:px-6">
-        <h1 className="text-3xl font-semibold tracking-[-0.01em] sm:text-4xl">
+        <h1 className="titular-2">
           Hola, {primerNombre}.{ES_FICTICIA && <Ficticio>Ficticia</Ficticio>}
         </h1>
-        <p className="mt-2 text-tinta/75">Esto es lo que pasa con tus obras.</p>
+        <p className="cuerpo-g mt-3 text-tinta/75">Esto es lo que pasa con tus obras.</p>
 
         <dl className="mt-8 grid grid-cols-3 border-y border-linea">
           <Cifra valor={filas.length} nombre={MODO_JOSE_LUIS ? 'Obras en la demo' : 'Obras de ejemplo'} />
@@ -100,7 +99,7 @@ export default function Panel() {
         <section className="mt-12">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <h2 className="text-xl font-semibold">Quién tiene tu obra</h2>
+              <h2 className="titular-3">Quién tiene tu obra</h2>
               <p className="mt-1 text-sm text-tinta/70">
                 Solo aparece quien reclamó su obra y dejó su correo. En la página pública solo salen sus iniciales.
               </p>
@@ -182,7 +181,7 @@ export default function Panel() {
         {/* Obras */}
         <section className="mt-14">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="text-xl font-semibold">Tus obras</h2>
+            <h2 className="titular-3">Tus obras</h2>
             {!registrando && (
               <button
                 type="button"
@@ -210,17 +209,14 @@ export default function Panel() {
 
           {nueva && (
             <div className="entra mt-5 flex flex-col items-start gap-5 rounded-2xl bg-lienzo p-6 sm:flex-row sm:items-center">
-              <Punto tam={84} estado="feliz" />
+              <img src="/brand/isotipo.svg" alt="" width="84" height="84" className="sello-entra size-20" />
               <div>
                 <p className="font-mono text-xs text-verde">{nueva.registro} · brai.art/o/{nueva.codigo}</p>
                 <p className="mt-1 text-lg font-semibold">{nueva.titulo} quedó registrada en esta demo.</p>
                 <p className="mt-1 text-sm text-tinta/75">
-                  Es un registro de prueba: vive solo en este navegador. En la versión real, después imprimirías su tarjeta y su sello.
+                  Es un registro de prueba: vive solo en este navegador. En la versión real, después recibe su tarjeta y su sello.
                 </p>
                 <div className="mt-3 flex flex-wrap gap-4 text-sm font-semibold">
-                  <Link to={`/imprimir/${nueva.codigo}`} className="inline-flex items-center gap-1.5 text-terracota-btn hover:underline">
-                    <Printer size={16} /> Piezas para imprimir
-                  </Link>
                   <Link to={`/o/${nueva.codigo}`} className="inline-flex items-center gap-1.5 text-terracota-btn hover:underline">
                     Ver su página <ArrowUpRight size={16} />
                   </Link>
@@ -256,9 +252,6 @@ export default function Panel() {
                   <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm font-medium">
                     <Link to={`/o/${obra.codigo}`} className="text-terracota-btn hover:underline">
                       Ver página
-                    </Link>
-                    <Link to={`/imprimir/${obra.codigo}`} className="text-terracota-btn hover:underline">
-                      Imprimir piezas
                     </Link>
                   </div>
                 </div>
