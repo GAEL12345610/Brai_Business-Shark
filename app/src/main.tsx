@@ -17,16 +17,18 @@ function ArribaAlCambiar() {
 // La versión portátil se abre como archivo, sin servidor: ahí la dirección no sirve
 // para saber en qué pantalla estás, así que la navegación vive en memoria.
 const PORTATIL = import.meta.env.MODE === 'portatil'
-const Enrutador = PORTATIL ? MemoryRouter : BrowserRouter
-
-const arbol = (
-  <StrictMode>
-    <Enrutador>
-      <ArribaAlCambiar />
-      <App />
-    </Enrutador>
-  </StrictMode>
+// En la versión portátil se puede abrir una pantalla directa con ?ruta=/o/7KQ2X,
+// por ejemplo desde un sello NFC o un QR de prueba.
+const pedida = PORTATIL ? (new URLSearchParams(location.search).get('ruta') ?? '') : ''
+const inicio = /^\/[\w\-/]*$/.test(pedida) ? pedida : '/'
+const contenido = (
+  <>
+    <ArribaAlCambiar />
+    <App />
+  </>
 )
+
+const arbol = <StrictMode>{PORTATIL ? <MemoryRouter initialEntries={[inicio]}>{contenido}</MemoryRouter> : <BrowserRouter>{contenido}</BrowserRouter>}</StrictMode>
 
 const raiz = document.getElementById('root')!
 // La landing llega prerenderizada (memoria/contenido-en-html-crudo.md): se hidrata.

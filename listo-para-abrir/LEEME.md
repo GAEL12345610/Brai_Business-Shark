@@ -12,6 +12,7 @@ Cómo bajarlos desde GitHub: entra al archivo, toca el botón de descarga (flech
 ## Lo que hay que saber
 - Son copias: lo que se edita vive en `app/` (la web) y en `pitch/jurado-26nov/presentacion.html` (la presentación).
 - En `Brai-web.html` la navegación vive en memoria: si recargas la página, vuelves a la portada. Lo que reclames o registres se guarda solo en ese navegador.
+- Para abrir una obra directo, agrega `?ruta=/o/7KQ2X` al final de la dirección. Sirve para probar un sello NFC o un QR que apunte a una obra.
 - La web sigue siendo una demo con personas y obras de ejemplo. Nada se envía a ningún servidor.
 
 ## Cómo volver a generarlos
