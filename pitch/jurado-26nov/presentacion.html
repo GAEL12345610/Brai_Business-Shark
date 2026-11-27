@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brai, presentación para el jurado</title>
+<style>
+@font-face { font-family: Fraunces; src: url(../reunion-jose-luis/fuentes/fraunces-latin-opsz-normal.woff2) format('woff2'); font-weight: 100 900; font-display: block; }
+@font-face { font-family: Schibsted; src: url(../reunion-jose-luis/fuentes/schibsted-grotesk-latin-wght-normal.woff2) format('woff2'); font-weight: 400 900; font-display: block; }
+@font-face { font-family: Plex; src: url(../reunion-jose-luis/fuentes/ibm-plex-mono-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-display: block; }
+@property --barrido { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+:root { --terracota: #C06E52; --btn: #A2563D; --tinta: #2B2622; --dorado: #C9A24B; --oro: #F3EBD8; --lienzo: #F6F1EA; --verde: #5E6C52; --linea: #E5DDCF; --arena: #E9E1D4; --e: cubic-bezier(.22, 1, .36, 1); }
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; background: #171412; overflow: hidden; }
+body { font-family: Schibsted, system-ui, sans-serif; color: var(--tinta); -webkit-font-smoothing: antialiased; }
+.escenario { position: fixed; left: 50%; top: 50%; width: 1920px; height: 1080px; transform: translate(-50%, -50%) scale(var(--k, 1)); }
+.lam { position: absolute; inset: 0; overflow: hidden; padding: 96px 130px 110px; background: var(--lienzo); opacity: 0; visibility: hidden; transition: opacity .7s var(--e), visibility 0s .7s; counter-increment: lam; display: flex; flex-direction: column; }
+.lam.activa { opacity: 1; visibility: visible; transition: opacity .7s var(--e); z-index: 2; }
+.lam.oscura { background: var(--tinta); color: var(--lienzo); }
+.lam.arena { background: var(--arena); }
+.centro { align-items: center; justify-content: center; text-align: center; }
+.medio { justify-content: center; }
+
+/* Luz y grano */
+.luz { position: absolute; inset: 0; pointer-events: none; }
+.luz i { position: absolute; border-radius: 50%; }
+.luz .l1 { width: 1300px; height: 1300px; left: -420px; top: -520px; background: radial-gradient(closest-side, rgba(192,110,82,.36), rgba(192,110,82,0)); animation: deriva 20s ease-in-out infinite alternate; }
+.luz .l2 { width: 1150px; height: 1150px; right: -360px; top: -160px; background: radial-gradient(closest-side, rgba(201,162,75,.32), rgba(201,162,75,0)); animation: deriva 26s ease-in-out infinite alternate-reverse; }
+.luz .l3 { width: 1000px; height: 1000px; left: 30%; bottom: -620px; background: radial-gradient(closest-side, rgba(94,108,82,.22), rgba(94,108,82,0)); animation: deriva 30s ease-in-out infinite alternate; }
+.oscura .luz { opacity: .55; }
+@keyframes deriva { to { transform: translate3d(140px, 90px, 0) scale(1.14); } }
+.lam::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .07; mix-blend-mode: multiply; z-index: 1; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.lam > * { position: relative; z-index: 2; }
+.lam > .luz { position: absolute; z-index: 0; }
+
+/* Tipografia */
+.rot { font-family: Plex, monospace; font-size: 24px; letter-spacing: .2em; text-transform: uppercase; color: var(--verde); display: flex; align-items: center; gap: 22px; }
+.oscura .rot { color: rgba(246,241,234,.7); }
+.t0 { font-family: Fraunces, serif; font-weight: 560; font-size: 230px; line-height: .9; letter-spacing: -.04em; }
+.t1 { font-family: Fraunces, serif; font-weight: 560; font-size: 148px; line-height: .96; letter-spacing: -.035em; }
+.t2 { font-family: Fraunces, serif; font-weight: 560; font-size: 104px; line-height: 1; letter-spacing: -.03em; }
+.t3 { font-family: Fraunces, serif; font-weight: 560; font-size: 60px; line-height: 1.05; letter-spacing: -.02em; }
+.tx { font-size: 38px; line-height: 1.35; }
+.tm { font-size: 30px; line-height: 1.4; }
+.nota { font-family: Plex, monospace; font-size: 21px; line-height: 1.5; color: rgba(43,38,34,.66); }
+.oscura .nota { color: rgba(246,241,234,.6); }
+.tc { color: var(--btn); }
+.oscura .tc { color: var(--terracota); }
+.td { color: var(--dorado); }
+.apagado { opacity: .32; }
+.pil { font-family: Plex, monospace; font-size: 19px; letter-spacing: .14em; padding: 7px 18px; border-radius: 99px; background: var(--dorado); color: var(--tinta); text-transform: uppercase; }
+.pil.linea { background: none; box-shadow: inset 0 0 0 2px currentColor; color: inherit; }
+.vid { background: linear-gradient(140deg, rgba(255,255,255,.82), rgba(255,255,255,.48)); border: 1.5px solid rgba(255,255,255,.9); border-radius: 44px; box-shadow: inset 0 1px 0 #fff, 0 50px 90px -50px rgba(43,38,34,.5); }
+.oscura .vid { background: linear-gradient(140deg, rgba(246,241,234,.13), rgba(246,241,234,.04)); border-color: rgba(246,241,234,.18); box-shadow: inset 0 1px 0 rgba(246,241,234,.16); }
+.pie { position: absolute !important; left: 130px; right: 130px; bottom: 44px; display: flex; justify-content: space-between; font-family: Plex, monospace; font-size: 19px; letter-spacing: .1em; color: rgba(43,38,34,.55); }
+.oscura .pie { color: rgba(246,241,234,.5); }
+.pie::after { content: counter(lam, decimal-leading-zero) ' / 15'; }
+.fila { display: flex; gap: 40px; }
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+.g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px; }
+.mt1 { margin-top: 26px; } .mt2 { margin-top: 48px; } .mt3 { margin-top: 76px; } .auto { margin-top: auto; }
+
+/* Entradas: solo corren en la lamina activa */
+.a { opacity: 0; }
+.activa .a { animation: sube 1s var(--e) both; animation-delay: calc(var(--i, 0) * 130ms + 200ms); }
+.activa .a.z { animation-name: zoom; }
+.activa .a.izq { animation-name: izq; }
+.activa .a.gira { animation-name: gira-entra; }
+@keyframes sube { from { opacity: 0; transform: translateY(70px); } to { opacity: 1; transform: none; } }
+@keyframes zoom { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+@keyframes izq { from { opacity: 0; transform: translateX(-110px); } to { opacity: 1; transform: none; } }
+@keyframes gira-entra { from { opacity: 0; transform: translateY(80px) rotate(-8deg); } to { opacity: 1; transform: none; } }
+.pal { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .14em; margin-bottom: -.14em; }
+.pal > b { display: inline-block; font-weight: inherit; transform: translateY(115%) rotate(5deg); }
+.activa .pal > b { animation: palabra 1.15s var(--e) both; animation-delay: calc(var(--i, 0) * 110ms + 150ms); }
+@keyframes palabra { from { transform: translateY(115%) rotate(5deg); } to { transform: none; } }
+
+/* Enso real, revelado como trazo */
+.enso { -webkit-mask-image: conic-gradient(from 60deg, #000 var(--barrido), transparent 0); mask-image: conic-gradient(from 60deg, #000 var(--barrido), transparent 0); }
+.activa .enso { animation: barrido 2s var(--e) .3s both; }
+@keyframes barrido { from { --barrido: 0deg; } to { --barrido: 360deg; } }
+.orbita { position: absolute; inset: -22%; border-radius: 50%; border: 2px dashed rgba(192,110,82,.45); animation: vuelta 50s linear infinite; }
+@keyframes vuelta { to { transform: rotate(360deg); } }
+
+/* Escena del toque */
+.reverso { position: relative; width: 600px; height: 750px; border-radius: 8px; background: #E8DCC8; box-shadow: inset 0 0 0 22px #C9AE8A, inset 0 0 0 24px #B39570, 0 70px 100px -60px rgba(43,38,34,.7); }
+.reverso::before { content: ''; position: absolute; left: 22px; right: 22px; top: 50%; height: 30px; margin-top: -15px; background: #C9AE8A; }
+.reverso::after { content: ''; position: absolute; top: 22px; bottom: 22px; left: 50%; width: 30px; margin-left: -15px; background: #C9AE8A; }
+.sello { position: absolute; left: 86px; top: 96px; width: 180px; height: 180px; border-radius: 50%; background: var(--lienzo); display: grid; place-items: center; box-shadow: inset 0 0 0 2px #d8cdbb, 0 14px 26px -12px rgba(43,38,34,.55); z-index: 2; }
+.sello img { width: 96px; }
+.onda { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--terracota); opacity: 0; }
+.activa .onda { animation: onda 2.2s var(--e) 1.6s infinite; }
+.activa .onda + .onda { animation-delay: 2.3s; }
+@keyframes onda { from { opacity: .8; transform: scale(1); } to { opacity: 0; transform: scale(2.8); } }
+.cel { position: absolute; left: 230px; top: 110px; width: 330px; padding: 11px; border-radius: 46px; background: var(--tinta); box-shadow: 0 70px 90px -40px rgba(43,38,34,.85); z-index: 3; }
+.activa .cel { animation: acerca 1.6s var(--e) .3s both; }
+@keyframes acerca { from { opacity: 0; transform: translate(260px, 380px) rotate(20deg); } to { opacity: 1; transform: none; } }
+.pantalla { border-radius: 36px; overflow: hidden; background: var(--lienzo); }
+.pantalla .arte { background: #2F5D62; padding: 12px; }
+.pantalla .arte img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.pantalla .dat { padding: 16px 18px 22px; }
+.chip { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 99px; background: var(--oro); font-weight: 600; font-size: 17px; box-shadow: 0 0 0 2px var(--dorado); }
+.chip i { width: 11px; height: 11px; border-radius: 50%; background: var(--dorado); }
+.activa .chip.sella { animation: sella .8s var(--e) 2s both; }
+@keyframes sella { from { opacity: 0; transform: scale(2.2) rotate(-14deg); } 60% { opacity: 1; transform: scale(.94); } to { opacity: 1; transform: none; } }
+
+/* Pasos */
+.paso { padding: 44px 40px 48px; }
+.paso .num { font-family: Fraunces, serif; font-size: 150px; line-height: .9; letter-spacing: -.04em; color: var(--terracota); }
+.linea-pasos { height: 4px; border-radius: 4px; background: var(--terracota); transform: scaleX(0); transform-origin: left; }
+.activa .linea-pasos { animation: tira 1.8s var(--e) .4s both; }
+@keyframes tira { to { transform: scaleX(1); } }
+
+/* Sistema */
+.nodo { flex: 1; padding: 42px 34px; text-align: center; }
+.nodo svg { width: 88px; height: 88px; stroke: var(--btn); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.flecha { flex: 0 0 70px; align-self: center; height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--terracota), var(--dorado)); position: relative; transform: scaleX(0); transform-origin: left; }
+.activa .flecha { animation: tira .7s var(--e) both; animation-delay: calc(var(--i, 0) * 130ms + 500ms); }
+.flecha::after { content: ''; position: absolute; right: -4px; top: -9px; border-left: 16px solid var(--dorado); border-top: 11px solid transparent; border-bottom: 11px solid transparent; }
+.flecha i { position: absolute; top: -6px; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--dorado); animation: viaja 1.8s linear infinite; }
+@keyframes viaja { from { left: 0; opacity: 1; } to { left: 100%; opacity: 0; } }
+
+/* Costos */
+.tira { display: flex; height: 120px; border-radius: 30px; overflow: hidden; transform: scaleX(0); transform-origin: left; }
+.activa .tira { animation: tira 1.6s var(--e) 1s both; }
+.tira span { display: grid; place-items: center; font-family: Plex, monospace; font-size: 26px; color: var(--tinta); }
+.leyenda { display: flex; }
+.leyenda div { padding-top: 22px; font-size: 27px; line-height: 1.25; }
+.leyenda b { display: block; font-family: Plex, monospace; font-weight: 400; font-size: 22px; opacity: .65; }
+
+/* Grafica */
+.graf { display: flex; align-items: flex-end; gap: 110px; height: 560px; border-bottom: 3px solid rgba(246,241,234,.35); padding: 0 30px; }
+.grupo { flex: 1; display: flex; align-items: flex-end; justify-content: center; gap: 30px; position: relative; height: 100%; }
+.col { width: 150px; position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+.col .v { font-family: Fraunces, serif; font-size: 44px; letter-spacing: -.02em; margin-bottom: 14px; white-space: nowrap; }
+.col .b { width: 100%; border-radius: 18px 18px 0 0; transform: scaleY(0); transform-origin: bottom; }
+.activa .col .b { animation: alza 1.3s var(--e) both; animation-delay: calc(var(--i, 0) * 150ms + 500ms); }
+@keyframes alza { to { transform: scaleY(1); } }
+.col.A .b { background: linear-gradient(180deg, #D98A6C, var(--terracota)); }
+.col.B .b { background: linear-gradient(180deg, #8A9A7C, var(--verde)); }
+.col.neg .b { position: absolute; top: 100%; border-radius: 0 0 14px 14px; background: none; box-shadow: inset 0 0 0 3px var(--verde); transform-origin: top; }
+.col.neg .v { margin-bottom: 14px; }
+.eje { display: flex; gap: 110px; padding: 22px 30px 0; }
+.eje div { flex: 1; text-align: center; font-size: 32px; }
+
+/* Comparativa */
+table { border-collapse: collapse; width: 100%; font-size: 33px; }
+th { font-family: Plex, monospace; font-weight: 400; font-size: 21px; letter-spacing: .14em; text-transform: uppercase; color: var(--verde); text-align: left; padding: 0 22px 20px; }
+td { padding: 23px 22px; border-top: 2px solid var(--linea); }
+tr.brai td { border: 0; background: var(--tinta); color: var(--lienzo); font-weight: 600; }
+tr.brai td:first-child { border-radius: 26px 0 0 26px; } tr.brai td:last-child { border-radius: 0 26px 26px 0; }
+.si { color: var(--verde); font-weight: 700; } .brai .si { color: var(--dorado); } .no { opacity: .4; }
+
+/* Columnas de obras, marcos y aparatos */
+.lado { position: absolute !important; top: 0; bottom: 0; width: 290px; overflow: hidden; z-index: 1 !important; -webkit-mask-image: linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent); mask-image: linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent); }
+.lado.izq { left: 70px; } .lado.der { right: 70px; }
+.carril { animation: carril 40s linear infinite; }
+.baja .carril { animation-direction: reverse; animation-duration: 48s; }
+@keyframes carril { to { transform: translateY(-50%); } }
+.pieza { width: 78%; margin: 0 0 48px 4%; padding: 11px; background: var(--tinta); box-shadow: 0 40px 60px -36px rgba(43,38,34,.8); transform: rotate(-4deg); }
+.oscura .pieza { background: #171412; box-shadow: 0 0 0 1px rgba(246,241,234,.14); }
+.pieza:nth-child(even) { margin-left: 18%; transform: rotate(3.5deg); }
+.pieza img, .marco img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.marco { position: relative; padding: 14px; background: #171412; box-shadow: 0 0 0 1px rgba(246,241,234,.16), 0 50px 70px -40px rgba(0,0,0,.9); }
+.arena .marco, .lam:not(.oscura) .marco { background: var(--tinta); box-shadow: 0 30px 50px -30px rgba(43,38,34,.8); }
+.duda { text-align: center; }
+.duda .marco { width: 300px; margin: 0 auto 34px; }
+.duda:nth-child(1) .marco { transform: rotate(-3deg); } .duda:nth-child(3) .marco { transform: rotate(3deg); }
+.duda .marco img { filter: saturate(.55) brightness(.62); }
+.sello-duda { position: absolute; left: 50%; top: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px; border-radius: 50%; display: grid; place-items: center; background: rgba(246,241,234,.94); box-shadow: 0 0 0 3px var(--dorado), 0 20px 40px -14px rgba(0,0,0,.7); }
+.sello-duda svg { width: 82px; height: 82px; fill: none; stroke: var(--btn); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.dibujo { height: 230px; display: grid; place-items: center; position: relative; margin-bottom: 20px; }
+.dibujo .sello { width: 170px; height: 170px; }
+.mini-icono { position: absolute; right: 22%; bottom: 8%; width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; background: var(--btn); box-shadow: 0 14px 26px -12px rgba(43,38,34,.7); }
+.mini-icono svg { width: 40px; height: 40px; fill: none; stroke: var(--lienzo); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.num-ch { font-family: Plex, monospace; font-size: 24px; color: var(--btn); margin-bottom: 4px; }
+.tarjeta { position: relative; width: 300px; aspect-ratio: 85 / 55; padding: 20px 22px; border-radius: 12px; background: var(--lienzo); box-shadow: inset 0 0 0 1px #d8cdbb, 0 26px 40px -26px rgba(43,38,34,.7); text-align: left; transform: rotate(-3deg); }
+.tarjeta p { font-family: Fraunces, serif; font-weight: 560; font-size: 24px; }
+.tarjeta span { font-family: Plex, monospace; font-size: 14px; color: var(--verde); }
+.tarjeta i { position: absolute; left: 22px; bottom: 18px; width: 150px; padding-top: 4px; border-top: 1.5px solid var(--tinta); font-family: Fraunces, serif; font-size: 22px; }
+.tarjeta img { position: absolute; right: 18px; top: 16px; width: 40px; }
+.tel { flex: none; width: 330px; padding: 10px; border-radius: 52px; background: linear-gradient(145deg, #5b5650, #1f1c19 38%, #3a3632 70%, #14110f); box-shadow: 0 0 0 2px #0e0c0b, inset 0 0 0 2px rgba(255,255,255,.14), 0 60px 80px -40px rgba(0,0,0,.85); }
+.tel img { display: block; width: 100%; border-radius: 43px; }
+.navegador { flex: none; width: 900px; padding-top: 38px; border-radius: 22px; overflow: hidden; background: var(--tinta) radial-gradient(circle at 26px 19px, #C06E52 6px, transparent 7px), var(--tinta); box-shadow: 0 60px 90px -50px rgba(43,38,34,.8); }
+.navegador img { display: block; width: 100%; }
+
+/* Interfaz */
+.ui { position: fixed; z-index: 10; }
+.avance { left: 0; right: 0; top: 0; height: 5px; background: rgba(246,241,234,.12); }
+.avance i { display: block; height: 100%; background: linear-gradient(90deg, var(--terracota), var(--dorado)); transform-origin: left; transform: scaleX(0); transition: transform .6s var(--e); }
+.ayuda { transition: opacity .6s; right: 18px; bottom: 12px; font-family: Plex, monospace; font-size: 12px; color: rgba(246,241,234,.45); }
+
+@media print {
+  @page { size: 1920px 1080px; margin: 0; }
+  html, body { height: auto; overflow: visible; background: none; }
+  .escenario { position: static; transform: none; height: auto; }
+  .lam { position: relative; height: 1080px; opacity: 1; visibility: visible; break-after: page; }
+  .ui, .lam::before { display: none; }
+  .lado .pieza:nth-child(n+5) { display: none; }
+  .lado { -webkit-mask-image: none; mask-image: none; }
+  .duda .marco img { filter: none; opacity: .55; }
+  .a, .pal > b, .enso, .cel, .chip.sella, .linea-pasos, .flecha, .tira, .col .b { opacity: 1 !important; transform: none !important; animation: none !important; -webkit-mask-image: none; mask-image: none; }
+  .luz i, .orbita, .flecha i, .onda, .carril { animation: none !important; }
+  .flecha i, .onda { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .a, .pal > b, .enso, .cel, .chip.sella, .linea-pasos, .flecha, .tira, .col .b { opacity: 1 !important; transform: none !important; animation: none !important; -webkit-mask-image: none; mask-image: none; }
+  .luz i, .orbita, .flecha i, .onda { animation: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="ui avance"><i id="avance"></i></div>
+<div class="ui ayuda">Flechas o clic para avanzar. F: pantalla completa</div>
+
+<main class="escenario" id="escenario">
+
+  <section class="lam centro">
+    <div class="luz"><i class="l1"></i><i class="l2"></i><i class="l3"></i></div>
+    <div class="lado izq"><div class="carril"><div class="pieza"><img src="../../app/public/obras/sin-titulo-1.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-2.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-3.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/los-olvidados.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-1.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-2.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-3.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/los-olvidados.svg" alt=""></div></div></div>
+    <div class="lado der baja"><div class="carril"><div class="pieza"><img src="../../app/public/obras/sin-titulo-3.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/los-olvidados.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-2.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-1.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-3.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/los-olvidados.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-2.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-1.svg" alt=""></div></div></div>
+    <div style="display:flex;align-items:center;gap:46px">
+      <div style="position:relative;width:260px;height:260px" class="a z">
+        <span class="orbita"></span>
+        <img class="enso" src="../../brand/isotipo.svg" alt="" width="260" height="260">
+      </div>
+      <h1 class="t0 tc" style="font-size:340px"><span class="pal" style="--i:3"><b>Brai</b></span></h1>
+    </div>
+    <p class="t2 mt1 a" style="--i:6;font-size:78px">Cada obra sabe de dónde viene.</p>
+    <p class="rot mt3 a" style="--i:8"><span class="pil">Prototipo</span> Business Shark 8°</p>
+    <div class="pie"><span></span></div>
+  </section>
+
+  <section class="lam oscura medio">
+    <div class="luz"><i class="l1"></i><i class="l2"></i></div>
+    <p class="rot a"><span class="pil">Hipótesis</span> El problema</p>
+    <h2 class="t2 mt1 a" style="--i:1">Una obra <span class="tc">sin registro.</span></h2>
+    <div class="g3 mt2" style="gap:70px">
+      <figure class="duda a gira" style="--i:3">
+        <div class="marco"><img src="../../app/public/obras/sin-titulo-2.svg" alt=""><span class="sello-duda"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span></div>
+        <figcaption><p class="t3">¿Es original?</p><p class="tx tc mt1" style="margin-top:8px">Nadie lo sabe.</p></figcaption>
+      </figure>
+      <figure class="duda a gira" style="--i:4">
+        <div class="marco"><img src="../../app/public/obras/los-olvidados.svg" alt=""><span class="sello-duda"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/><path d="M3 2l18 20"/></svg></span></div>
+        <figcaption><p class="t3">¿Dónde está?</p><p class="tx tc mt1" style="margin-top:8px">Pierdes el rastro.</p></figcaption>
+      </figure>
+      <figure class="duda a gira" style="--i:5">
+        <div class="marco"><img src="../../app/public/obras/sin-titulo-3.svg" alt=""><span class="sello-duda"><svg viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/><path d="M3 2l18 20"/></svg></span></div>
+        <figcaption><p class="t3">¿Y su historia?</p><p class="tx tc mt1" style="margin-top:8px">Jamás se cuenta.</p></figcaption>
+      </figure>
+    </div>
+    <div class="pie"><span>Brai</span></div>
+  </section>
+
+  <section class="lam medio">
+    <div class="luz"><i class="l1"></i><i class="l2"></i></div>
+    <div class="g2" style="align-items:center">
+      <div>
+        <p class="rot a">La solución</p>
+        <h2 class="t1 mt2">
+          <span class="pal" style="--i:1"><b>Un</b></span> <span class="pal" style="--i:2"><b>toque.</b></span><br>
+          <span class="tc"><span class="pal" style="--i:4"><b>Toda</b></span> <span class="pal" style="--i:5"><b>su</b></span> <span class="pal" style="--i:6"><b>historia.</b></span></span>
+        </h2>
+        <p class="tm mt3 a" style="--i:8"><span class="chip" style="font-size:30px;padding:14px 28px"><i style="width:16px;height:16px"></i> Sin descargar nada.</span></p>
+      </div>
+      <div style="display:grid;place-items:center">
+        <div class="reverso a z" style="--i:2">
+          <div class="sello"><span class="onda"></span><span class="onda"></span><img src="../../brand/isotipo.svg" alt=""></div>
+          <div class="cel">
+            <div class="pantalla">
+              <div class="arte"><img src="../../app/public/obras/los-olvidados.svg" alt=""></div>
+              <div class="dat">
+                <p class="nota" style="font-size:13px;letter-spacing:.12em">LUCÍA ARCE · EJEMPLO</p>
+                <p class="t3" style="font-size:30px;margin:4px 0 12px">Figuras del barrio</p>
+                <span class="chip sella" style="font-size:14px;padding:6px 13px"><i></i> Registrada por el artista</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pie"><span>Brai · Innovación</span></div>
+  </section>
+
+  <section class="lam arena medio">
+    <p class="rot a">Cómo funciona</p>
+    <h2 class="t2 mt1 a" style="--i:1">Cuatro pasos.</h2>
+    <div class="linea-pasos mt2"></div>
+    <div class="g4 mt2">
+      <div class="vid paso a" style="--i:3"><div class="dibujo"><div class="marco" style="width:150px;padding:9px;transform:rotate(-4deg)"><img src="../../app/public/obras/sin-titulo-1.svg" alt=""></div><span class="mini-icono"><svg viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></svg></span></div><p class="num-ch">1</p><p class="t3">Registra</p><p class="tm" style="margin-top:8px">Fotos e historia.</p></div>
+      <div class="vid paso a" style="--i:4"><div class="dibujo"><div class="sello" style="position:relative;left:0;top:0"><span class="onda"></span><span class="onda"></span><img src="../../brand/isotipo.svg" alt=""></div></div><p class="num-ch">2</p><p class="t3">Sella</p><p class="tm" style="margin-top:8px">NFC y QR detrás.</p></div>
+      <div class="vid paso a" style="--i:5"><div class="dibujo"><div class="tarjeta"><p>Figuras del barrio</p><span>BRAI-0001</span><i>Lucía Arce</i><img src="../../brand/isotipo.svg" alt=""></div></div><p class="num-ch">3</p><p class="t3">Entrega</p><p class="tm" style="margin-top:8px">Tarjeta firmada.</p></div>
+      <div class="vid paso a" style="--i:6"><div class="dibujo"><span class="chip" style="font-size:26px;padding:16px 26px"><i style="width:16px;height:16px"></i> Dueño: A. L.</span></div><p class="num-ch">4</p><p class="t3">Reclama</p><p class="tm" style="margin-top:8px">Queda como dueño.</p></div>
+    </div>
+    <div class="pie"><span>Brai · Innovación</span></div>
+  </section>
+
+  <section class="lam medio">
+    <div class="luz"><i class="l2"></i><i class="l3"></i></div>
+    <p class="rot a">El sistema</p>
+    <h2 class="t2 mt1 a" style="--i:1">Del sello al registro, <span class="tc">en un segundo.</span></h2>
+    <div class="fila mt3" style="gap:22px">
+      <div class="vid nodo a z" style="--i:2">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4M3.5 3.5a12 12 0 0 0 0 17M20.5 3.5a12 12 0 0 1 0 17"/></svg>
+        <p class="t3 mt1">Sello NFC</p><p class="nota mt1">NTAG213 hoy<br>424 DNA después</p>
+      </div>
+      <div class="flecha" style="--i:3"><i></i></div>
+      <div class="vid nodo a z" style="--i:4">
+        <svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
+        <p class="t3 mt1">Página</p><p class="nota mt1">brai.art/o/CÓDIGO<br>React y Vercel</p>
+      </div>
+      <div class="flecha" style="--i:5"><i></i></div>
+      <div class="vid nodo a z" style="--i:6">
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v6.5c0 1.7 3.6 3 8 3s8-1.300 8-3V5.500M4 12v6.500c0 1.700 3.600 3 8 3s8-1.300 8-3V12"/></svg>
+        <p class="t3 mt1">Registro</p><p class="nota mt1">Supabase<br>seguridad por fila</p>
+      </div>
+      <div class="flecha" style="--i:7"><i></i></div>
+      <div class="vid nodo a z" style="--i:8">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 13v-2M12 13V8M17 13v-4"/></svg>
+        <p class="t3 mt1">Panel</p><p class="nota mt1">El artista ve<br>quién la reclamó</p>
+      </div>
+    </div>
+    <p class="tm mt3 a" style="--i:10">Sin NFC también funciona: <b>QR</b> junto al sello o <b>código</b> escrito en la web.</p>
+    <div class="pie"><span>Brai · Prototipo: la demo corre sin base de datos conectada</span></div>
+  </section>
+
+  <section class="lam oscura medio">
+    <div class="luz"><i class="l1"></i><i class="l2"></i></div>
+    <div class="g2" style="align-items:center">
+      <div>
+        <p class="rot a"><span class="pil">Demo</span> Pruébalo ahora</p>
+        <div class="fila mt2" style="align-items:center;gap:50px">
+          <div class="vid a z" style="--i:2;padding:36px;background:var(--lienzo)"><img src="qr-inicio.svg" alt="Código QR de la demo" width="330" height="330" style="display:block"></div>
+        </div>
+        <p class="t2 mt2 a" style="--i:4;font-size:92px">braiart.vercel.app</p>
+      </div>
+      <div style="display:flex;justify-content:center;align-items:flex-start;gap:50px">
+        <div class="tel a gira" style="--i:3;transform:rotate(-5deg)"><img src="img/cel-inicio.jpg" alt=""></div>
+        <div class="tel a gira" style="--i:5;margin-top:90px"><img src="img/cel-obra.jpg" alt=""></div>
+      </div>
+    </div>
+    <div class="pie"><span>Brai · Personas y obras de ejemplo</span></div>
+  </section>
+
+  <section class="lam medio">
+    <div class="luz"><i class="l1"></i><i class="l3"></i></div>
+    <p class="rot a">Innovación</p>
+    <h2 class="t2 mt1 a" style="--i:1">Se ve, <span class="tc">no se explica.</span></h2>
+    <div class="fila mt2" style="align-items:flex-end;gap:60px">
+      <div class="navegador a izq" style="--i:3"><img src="img/web-inicio.jpg" alt=""></div>
+      <div class="tel a gira" style="--i:5;width:300px;margin-bottom:-10px"><img src="img/cel-ficha.jpg" alt=""></div>
+      <div style="flex:1;padding-bottom:40px">
+        <p class="chip a z" style="--i:7;font-size:30px;padding:14px 28px"><i style="width:16px;height:16px"></i> Registrada por el artista</p>
+        <p class="t3 mt2 a" style="--i:8">Manda el artista.</p>
+        <p class="tm a" style="--i:9;margin-top:10px">Su nombre y su color.</p>
+      </div>
+    </div>
+    <div class="pie"><span>Brai · Arte y Español</span></div>
+  </section>
+
+  <section class="lam oscura medio">
+    <div class="luz"><i class="l1"></i><i class="l2"></i></div>
+    <p class="rot a"><span class="pil">Dato</span> Viabilidad · Cuánto nos cuesta una obra</p>
+    <div class="fila mt1" style="align-items:flex-end;gap:50px">
+      <p class="t0 tc a z" style="--i:1;font-size:330px"><span data-n="8.73" data-d="2" data-p="$">$8.73</span></p>
+      <p class="t3 a" style="--i:3;padding-bottom:54px">pesos<br>por obra registrada</p>
+    </div>
+    <div class="mt2">
+      <div class="tira">
+        <span style="flex:2.90;background:#D98A6C">$2.90</span>
+        <span style="flex:2.53;background:var(--dorado)">$2.53</span>
+        <span style="flex:1.60;background:#E9E1D4">$1.60</span>
+        <span style="flex:1.00;background:#B9C4AD">$1.00</span>
+        <span style="flex:.70;background:#F6F1EA">$0.70</span>
+      </div>
+      <div class="leyenda a" style="--i:12">
+        <div style="flex:2.90">Tarjeta <b>estimado</b></div>
+        <div style="flex:2.53">Sello NFC <b>compra real</b></div>
+        <div style="flex:1.60">Etiqueta <b>estimado</b></div>
+        <div style="flex:1.00">QR <b>estimado</b></div>
+        <div style="flex:.70">VOID</div>
+      </div>
+    </div>
+    <div class="pie"><span>Brai · Fuente: docs/COSTOS.md. Sello NFC: 100 por $252.97 MXN</span></div>
+  </section>
+
+  <section class="lam medio">
+    <div class="luz"><i class="l2"></i><i class="l3"></i></div>
+    <p class="rot a">Viabilidad · Costo fijo al mes, con clientes</p>
+    <div class="fila mt3" style="align-items:center;gap:26px">
+      <div class="vid nodo a z" style="--i:1"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01"/></svg><p class="t2 mt1" style="font-size:92px">$376</p><p class="nota mt1">Servidor</p></div>
+      <p class="t2 tc a" style="--i:2">+</p>
+      <div class="vid nodo a z" style="--i:3"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v6.5c0 1.7 3.6 3 8 3s8-1.300 8-3V5.500M4 12v6.500c0 1.700 3.600 3 8 3s8-1.300 8-3V12"/></svg><p class="t2 mt1" style="font-size:92px">$470</p><p class="nota mt1">Base de datos</p></div>
+      <p class="t2 tc a" style="--i:4">+</p>
+      <div class="vid nodo a z" style="--i:5"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.500c3 3.300 3 15.700 0 19M12 2.500c-3 3.300-3 15.700 0 19"/></svg><p class="t2 mt1" style="font-size:92px">$33</p><p class="nota mt1">Dominio</p></div>
+      <p class="t2 tc a" style="--i:6">=</p>
+      <div class="vid nodo a z" style="--i:7;background:var(--tinta);color:var(--lienzo);border-color:transparent;flex:1.25"><p class="rot" style="justify-content:center;color:rgba(246,241,234,.7)">Al mes</p><p class="t1 mt1" style="color:var(--terracota)"><span data-n="880" data-p="$">$880</span></p><p class="nota mt1" style="color:rgba(246,241,234,.6)">aproximado</p></div>
+    </div>
+    <p class="tx mt3 a" style="--i:9">Hoy, como prototipo: <b class="tc">$49 al año.</b></p>
+    <div class="pie"><span>Brai · Fuente: docs/COSTOS.md. Dominio: $395 al año al renovar, $49 el primero</span></div>
+  </section>
+
+  <section class="lam arena medio">
+    <p class="rot a"><span class="pil">En prueba</span> Viabilidad · Lo que cobramos</p>
+    <h2 class="t2 mt1 a" style="--i:1">Dos precios. <span class="tc">La entrevista decide.</span></h2>
+    <div class="g2 mt3">
+      <div class="vid paso a gira" style="--i:3">
+        <p class="rot">Opción A · Mensualidad</p>
+        <p class="t1 mt1"><span data-n="7500" data-p="$">$7,500</span></p>
+        <p class="tx">de arranque, con 20 obras</p>
+        <p class="t3 mt2 tc">más $990 al mes</p>
+        <p class="nota mt2">Año 1: $19,380 por artista</p>
+      </div>
+      <div class="vid paso a gira" style="--i:5">
+        <p class="rot">Opción B · Por obra</p>
+        <p class="t1 mt1"><span data-n="2500" data-p="$">$2,500</span></p>
+        <p class="tx">de arranque, con 5 obras</p>
+        <p class="t3 mt2 tc">más $450 por obra</p>
+        <p class="nota mt2">Año 1: $4,750 por artista</p>
+      </div>
+    </div>
+    <div class="pie"><span>Brai · Ningún artista ha pagado todavía. Supuesto: 10 obras al año</span></div>
+  </section>
+
+  <section class="lam oscura medio">
+    <div class="luz"><i class="l1"></i><i class="l2"></i></div>
+    <p class="rot a">Viabilidad · Margen por obra</p>
+    <div class="g2 mt2" style="align-items:end">
+      <div class="a izq" style="--i:1">
+        <p class="tx" style="opacity:.75">Cobramos</p>
+        <p class="t0" style="font-size:280px"><span data-n="450" data-p="$">$450</span></p>
+      </div>
+      <div class="a izq" style="--i:4">
+        <p class="tx" style="opacity:.75">Nos cuesta</p>
+        <p class="t0 tc" style="font-size:280px"><span data-n="8.73" data-d="2" data-p="$">$8.73</span></p>
+      </div>
+    </div>
+    <div class="fila mt3" style="align-items:center">
+      <span class="chip a z" style="--i:8;font-size:40px;padding:18px 36px;color:var(--tinta)"><i style="width:20px;height:20px"></i> <span data-n="98" data-s="%">98%</span> de margen en materiales</span>
+    </div>
+    <div class="pie"><span>Brai · Opción B, obra adicional. (450 menos 8.73) entre 450</span></div>
+  </section>
+
+  <section class="lam oscura">
+    <div class="luz"><i class="l2"></i></div>
+    <p class="rot a"><span class="pil">Proyección</span> Viabilidad · Ganancia del año 1</p>
+    <div class="fila" style="align-items:baseline;justify-content:space-between;margin-top:18px">
+      <h2 class="t2 a" style="--i:1;font-size:84px">15 artistas, un año.</h2>
+      <p class="tm a" style="--i:2"><span style="color:var(--terracota)">■</span> Opción A &nbsp; <span style="color:#8A9A7C">■</span> Opción B</p>
+    </div>
+    <div class="graf" style="margin-top:26px">
+      <div class="grupo">
+        <div class="col A"><span class="v a" style="--i:5">$8,743</span><div class="b" style="height:16px;--i:1"></div></div>
+        <div class="col B neg"><span class="v a" style="--i:5;color:#B9C4AD">−$5,887</span><div class="b" style="height:11px;--i:2"></div></div>
+      </div>
+      <div class="grupo">
+        <div class="col A"><span class="v a" style="--i:8">$85,914</span><div class="b" style="height:147px;--i:3"></div></div>
+        <div class="col B"><span class="v a" style="--i:8;color:#B9C4AD">$12,764</span><div class="b" style="height:22px;--i:4"></div></div>
+      </div>
+      <div class="grupo">
+        <div class="col A"><span class="v a" style="--i:11">$278,841</span><div class="b" style="height:478px;--i:5"></div></div>
+        <div class="col B"><span class="v a" style="--i:11;color:#B9C4AD">$59,391</span><div class="b" style="height:102px;--i:6"></div></div>
+      </div>
+    </div>
+    <div class="eje"><div>1 artista</div><div>5 artistas</div><div>15 artistas</div></div>
+    <div class="pie"><span>Brai · Ingreso menos costo fijo ($10,550) y materiales ($87.30 por artista)</span></div>
+  </section>
+
+  <section class="lam arena medio">
+    <p class="rot a"><span class="pil">Hipótesis</span> Viabilidad · El mercado</p>
+    <div class="g3 mt3" style="align-items:end;gap:60px">
+      <div class="a" style="--i:1">
+        <p class="t1"><span data-n="8870">8,870</span></p>
+        <p class="tx mt1">artistas visuales en Jalisco</p>
+        <p class="nota mt1">DataMéxico, ENOE 2025</p>
+      </div>
+      <div class="a" style="--i:4">
+        <p class="t1 tc"><span data-n="177">177</span></p>
+        <p class="tx mt1">podrían ser clientes, si el 2% cumple el perfil</p>
+        <p class="nota mt1">Supuesto nuestro, sin validar</p>
+      </div>
+      <div class="a" style="--i:7">
+        <p class="t1"><span data-n="3.4" data-d="1" data-p="$" data-s=" M">$3.4 M</span></p>
+        <p class="tx mt1">techo teórico al año con la Opción A</p>
+        <p class="nota mt1">$840 mil con la Opción B</p>
+      </div>
+    </div>
+    <p class="tx mt3 a" style="--i:10"><b class="tc">69%</b> de los coleccionistas ya le compró directo a un artista.</p>
+    <div class="pie"><span>Brai · Art Basel y UBS 2025. Es un techo, no una meta</span></div>
+  </section>
+
+  <section class="lam medio">
+    <div class="luz"><i class="l2"></i></div>
+    <p class="rot a">Competencia</p>
+    <h2 class="t2 mt1 a" style="--i:1;font-size:88px">Lo digital ya es gratis. <span class="tc">Lo nuestro es en persona.</span></h2>
+    <table class="mt2 a" style="--i:3">
+      <tr><th></th><th>Precio</th><th>En persona</th><th>En español</th><th>El comprador se registra</th></tr>
+      <tr><td>markmy.art</td><td>Gratis</td><td class="no">No</td><td class="si">Sí</td><td class="no">No lo describe</td></tr>
+      <tr><td>Verisart</td><td>0 a 99.99 USD al mes</td><td class="no">No</td><td class="no">No</td><td>Transferencias</td></tr>
+      <tr><td>Tagsmart</td><td>20 a 120 libras por obra</td><td class="si">Servicio</td><td class="no">No</td><td class="no">?</td></tr>
+      <tr class="brai"><td>Brai</td><td>En prueba</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí, al reclamar</td></tr>
+    </table>
+    <div class="pie"><span>Brai · Precios consultados el 5 nov 2026</span></div>
+  </section>
+
+  <section class="lam oscura centro">
+    <div class="luz"><i class="l1"></i><i class="l2"></i></div>
+    <div class="lado izq"><div class="carril"><div class="pieza"><img src="../../app/public/obras/sin-titulo-1.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-2.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-3.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/los-olvidados.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-1.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-2.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-3.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/los-olvidados.svg" alt=""></div></div></div>
+    <div class="lado der baja"><div class="carril"><div class="pieza"><img src="../../app/public/obras/sin-titulo-3.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/los-olvidados.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-2.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-1.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-3.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/los-olvidados.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-2.svg" alt=""></div><div class="pieza"><img src="../../app/public/obras/sin-titulo-1.svg" alt=""></div></div></div>
+    <div style="position:relative;width:220px;height:220px" class="a z">
+      <span class="orbita"></span>
+      <img class="enso" src="../../brand/isotipo.svg" alt="" width="220" height="220">
+    </div>
+    <h2 class="t1 mt3">
+      <span class="pal" style="--i:2"><b>Cada</b></span> <span class="pal" style="--i:3"><b>obra</b></span> <span class="pal" style="--i:4"><b>sabe</b></span><br>
+      <span class="tc"><span class="pal" style="--i:5"><b>de</b></span> <span class="pal" style="--i:6"><b>dónde</b></span> <span class="pal" style="--i:7"><b>viene.</b></span></span>
+    </h2>
+    <div class="pie"><span>Brai · Business Shark 8°</span></div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var lams = Array.prototype.slice.call(document.querySelectorAll('.lam'))
+  var escenario = document.getElementById('escenario')
+  var avance = document.getElementById('avance')
+  var n = 0
+  var quieto = matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  function escala() {
+    escenario.style.setProperty('--k', Math.min(innerWidth / 1920, innerHeight / 1080))
+  }
+  function formato(v, d) {
+    return v.toLocaleString('es-MX', { minimumFractionDigits: d, maximumFractionDigits: d })
+  }
+  function contar(lam) {
+    if (quieto) return
+    lam.querySelectorAll('[data-n]').forEach(function (el) {
+      var fin = parseFloat(el.dataset.n), d = parseInt(el.dataset.d || '0', 10)
+      var p = el.dataset.p || '', s = el.dataset.s || ''
+      var retraso = 350, dura = 1500, t0 = performance.now() + retraso
+      el.textContent = p + formato(0, d) + s
+      cancelAnimationFrame(el._c)
+      ;(function paso(t) {
+        var k = Math.min(1, Math.max(0, (t - t0) / dura))
+        var e = 1 - Math.pow(1 - k, 4)
+        el.textContent = p + formato(fin * e, d) + s
+        if (k < 1) el._c = requestAnimationFrame(paso)
+        else el.textContent = p + formato(fin, d) + s
+      })(performance.now())
+    })
+  }
+  function ir(k) {
+    k = Math.max(0, Math.min(lams.length - 1, k))
+    lams[n].classList.remove('activa')
+    if (k !== n) document.querySelector('.ayuda').style.opacity = 0
+    n = k
+    lams[n].classList.add('activa')
+    contar(lams[n])
+    avance.style.transform = 'scaleX(' + (n + 1) / lams.length + ')'
+    try { history.replaceState(null, '', '#' + (n + 1)) } catch (e) {}
+  }
+
+  addEventListener('resize', escala)
+  addEventListener('keydown', function (e) {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].indexOf(e.key) >= 0) { e.preventDefault(); ir(n + 1) }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].indexOf(e.key) >= 0) { e.preventDefault(); ir(n - 1) }
+    else if (e.key === 'Home') ir(0)
+    else if (e.key === 'End') ir(lams.length - 1)
+    else if (e.key === 'f' || e.key === 'F') { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen() }
+  })
+  addEventListener('click', function (e) { ir(e.clientX < innerWidth * 0.3 ? n - 1 : n + 1) })
+  var x0 = null
+  addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX }, { passive: true })
+  addEventListener('touchend', function (e) {
+    if (x0 === null) return
+    var dx = e.changedTouches[0].clientX - x0
+    x0 = null
+    if (Math.abs(dx) > 50) { e.preventDefault(); ir(dx < 0 ? n + 1 : n - 1) }
+  })
+
+  escala()
+  var inicio = parseInt(location.hash.slice(1), 10)
+  lams[0].classList.add('activa')
+  ir(isNaN(inicio) ? 0 : inicio - 1)
+})()
+</script>
+</body>
+</html>
